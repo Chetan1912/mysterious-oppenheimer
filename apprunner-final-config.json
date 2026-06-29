@@ -1,0 +1,28 @@
+{
+  "ServiceName": "mysterious-oppenheimer-service",
+  "SourceConfiguration": {
+    "ImageRepository": {
+      "ImageIdentifier": "675254204326.dkr.ecr.ap-south-1.amazonaws.com/mysterious-oppenheimer:latest",
+      "ImageRepositoryType": "ECR",
+      "ImageConfiguration": {
+        "Port": "3000",
+        "RuntimeEnvironmentVariables": {
+          "NODE_ENV": "production",
+          "PORT": "3000",
+          "HOSTNAME": "0.0.0.0",
+          "DATABASE_URL": "postgresql://postgres:adminpassword123@mysterious-oppenheimer-db.cfuikim4232x.ap-south-1.rds.amazonaws.com:5432/postgres?schema=public",
+          "JWT_SECRET": "super_secret_session_token_key_2026_for_apex",
+          "CRON_SECRET": "fallback_cron_secret_token_2026"
+        }
+      }
+    },
+    "AuthenticationConfiguration": {
+      "AccessRoleArn": "arn:aws:iam::675254204326:role/AppRunnerECRAccessRole"
+    },
+    "AutoDeploymentsEnabled": true
+  },
+  "InstanceConfiguration": {
+    "Cpu": "1 vCPU",
+    "Memory": "2 GB"
+  }
+}

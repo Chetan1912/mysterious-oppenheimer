@@ -121,9 +121,9 @@ export default function OwnerTests() {
               <tr>
                 <th>Test Name</th>
                 <th>Batch / Class</th>
-                <th>Test Date</th>
+                <th className="hide-mobile">Test Date</th>
                 <th>Max Marks</th>
-                <th>Graded Students</th>
+                <th className="hide-mobile">Graded Students</th>
                 <th style={{ textAlign: "right" }}>Actions</th>
               </tr>
             </thead>
@@ -134,9 +134,9 @@ export default function OwnerTests() {
                   <td>
                     <span className={styles.batchBadge}>{test.batch.name}</span>
                   </td>
-                  <td>{new Date(test.testDate).toLocaleDateString()}</td>
+                  <td className="hide-mobile">{new Date(test.testDate).toLocaleDateString()}</td>
                   <td>{test.maxMarks} marks</td>
-                  <td>{test._count.marks} graded</td>
+                  <td className="hide-mobile">{test._count.marks} graded</td>
                   <td style={{ textAlign: "right" }}>
                     <button
                       className="btn btn-secondary"

@@ -267,7 +267,7 @@ export default function MarksEntry() {
   return (
     <div className={styles.container}>
       {/* Header */}
-      <div className={`${styles.header} flex justify-between align-center`}>
+      <div className={`${styles.header} flex justify-between align-center flex-mobile-col`}>
         <div>
           <h2>Student Marks Entry</h2>
           <p className={styles.subtitle}>Create academic tests and record student marks. Parents will receive immediate updates.</p>
@@ -357,7 +357,7 @@ export default function MarksEntry() {
               <thead>
                 <tr>
                   <th style={{ width: "35%" }}>Student Name</th>
-                  <th style={{ width: "20%" }}>Admission ID</th>
+                  <th className="hide-mobile" style={{ width: "20%" }}>Admission ID</th>
                   <th style={{ width: "20%" }}>Score obtained</th>
                   <th style={{ width: "25%" }}>Remarks / Feedback</th>
                 </tr>
@@ -366,7 +366,7 @@ export default function MarksEntry() {
                 {students.map((student) => (
                   <tr key={student.id}>
                     <td><strong>{student.name}</strong></td>
-                    <td><span className={styles.admissionId}>{student.admissionId}</span></td>
+                    <td className="hide-mobile"><span className={styles.admissionId}>{student.admissionId}</span></td>
                     <td>
                       <div className="flex align-center gap-2">
                         <input

@@ -280,9 +280,9 @@ export default function FeeManagement() {
                 <th>Student</th>
                 <th>Period</th>
                 <th>Total Due</th>
-                <th>Paid</th>
+                <th className="hide-mobile">Paid</th>
                 <th>Balance</th>
-                <th>Reminders</th>
+                <th className="hide-mobile">Reminders</th>
                 <th>Status</th>
                 <th style={{ textAlign: "right" }}>Actions</th>
               </tr>
@@ -300,11 +300,11 @@ export default function FeeManagement() {
                     </td>
                     <td><strong>{getMonthName(due.month)} {due.year}</strong></td>
                     <td>₹{Number(due.totalDue).toLocaleString()}</td>
-                    <td style={{ color: "var(--success)" }}>₹{Number(due.paidAmount).toLocaleString()}</td>
+                    <td className="hide-mobile" style={{ color: "var(--success)" }}>₹{Number(due.paidAmount).toLocaleString()}</td>
                     <td style={{ color: balance > 0 ? "var(--danger)" : "var(--neutral-500)", fontWeight: 600 }}>
                       ₹{balance.toLocaleString()}
                     </td>
-                    <td>
+                    <td className="hide-mobile">
                       <span className={styles.reminderCount}>
                         {due.reminderCount} sent
                       </span>

@@ -83,9 +83,9 @@ export default function AuditLogs() {
           <table className="table">
             <thead>
               <tr>
-                <th>Timestamp</th>
+                <th className="hide-mobile">Timestamp</th>
                 <th>User</th>
-                <th>Role</th>
+                <th className="hide-mobile">Role</th>
                 <th>Action</th>
                 <th>Details</th>
               </tr>
@@ -93,7 +93,7 @@ export default function AuditLogs() {
             <tbody>
               {logs.map((log) => (
                 <tr key={log.id}>
-                  <td style={{ fontSize: "0.8125rem", whiteSpace: "nowrap" }}>
+                  <td className="hide-mobile" style={{ fontSize: "0.8125rem", whiteSpace: "nowrap" }}>
                     {new Date(log.createdAt).toLocaleString()}
                   </td>
                   <td>
@@ -104,7 +104,7 @@ export default function AuditLogs() {
                       </span>
                     </div>
                   </td>
-                  <td>
+                  <td className="hide-mobile">
                     <span className={styles.roleBadge} data-role={log.user.role}>
                       {log.user.role}
                     </span>

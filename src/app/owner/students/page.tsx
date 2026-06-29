@@ -127,7 +127,7 @@ export default function StudentDirectory() {
                 <th>Batch</th>
                 <th>Parent Info</th>
                 <th>Fee Plan</th>
-                <th>Joining Date</th>
+                <th className="hide-mobile">Joining Date</th>
                 <th style={{ textAlign: "right" }}>Actions</th>
               </tr>
             </thead>
@@ -161,7 +161,7 @@ export default function StudentDirectory() {
                       <span style={{ color: "var(--neutral-400)" }}>None</span>
                     )}
                   </td>
-                  <td>{new Date(student.joiningDate).toLocaleDateString()}</td>
+                  <td className="hide-mobile">{new Date(student.joiningDate).toLocaleDateString()}</td>
                   <td style={{ textAlign: "right" }}>
                     <Link
                       href={`/owner/students/${student.id}`}

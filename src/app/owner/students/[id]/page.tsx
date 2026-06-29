@@ -10,6 +10,7 @@ interface Payment {
   paymentDate: string;
   paymentMethod: string;
   notes: string | null;
+  dueRecordId: string;
 }
 
 interface DueRecord {
@@ -70,24 +71,24 @@ export default function StudentProfile({ params }: { params: Promise<{ id: strin
   const [modalSubmitting, setModalSubmitting] = useState(false);
 
   useEffect(() => {
+    const fetchStudentProfile = async () => {
+      try {
+        const res = await fetch(`/api/owner/students/${id}`);
+        if (res.ok) {
+          const json = await res.json();
+          setStudent(json.student);
+        } else {
+          setError("Failed to load student profile");
+        }
+      } catch (err) {
+        setError("Network error loading student profile");
+      } finally {
+        setLoading(false);
+      }
+    };
+
     fetchStudentProfile();
   }, [id]);
-
-  const fetchStudentProfile = async () => {
-    try {
-      const res = await fetch(`/api/owner/students/${id}`);
-      if (res.ok) {
-        const json = await res.json();
-        setStudent(json.student);
-      } else {
-        setError("Failed to load student profile");
-      }
-    } catch (err) {
-      setError("Network error loading student profile");
-    } finally {
-      setLoading(false);
-    }
-  };
 
   const openPayModal = (due: DueRecord) => {
     setSelectedDue(due);
@@ -298,7 +299,7 @@ export default function StudentProfile({ params }: { params: Promise<{ id: strin
                   ) : (
                     student.payments.map((p) => {
                       // Find corresponding due record month/year
-                      const refDue = student.dueRecords.find((d) => d.id === (p as any).dueRecordId);
+                      const refDue = student.dueRecords.find((d) => d.id === p.dueRecordId);
                       const refMonthStr = refDue ? `${getMonthName(refDue.month)} ${refDue.year}` : "N/A";
                       return (
                         <tr key={p.id}>
@@ -383,7 +384,7 @@ export default function StudentProfile({ params }: { params: Promise<{ id: strin
               <p className={styles.notesText}>{student.notes}</p>
             ) : (
               <p style={{ color: "var(--neutral-400)", fontStyle: "italic" }}>
-                No specific notes recorded. You can edit this student's details to add custom background notes.
+                No specific notes recorded. You can edit this student&apos;s details to add custom background notes.
               </p>
             )}
           </div>

@@ -45,7 +45,7 @@ export async function GET(request: NextRequest) {
     });
 
     // 3. If testId is provided, fetch existing marks
-    let existingMarks: any[] = [];
+    let existingMarks: import("@prisma/client").Marks[] = [];
     if (testId) {
       existingMarks = await db.marks.findMany({
         where: { testId },

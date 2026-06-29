@@ -40,10 +40,6 @@ export default function TeacherDashboard() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
-  useEffect(() => {
-    fetchTeacherData();
-  }, []);
-
   const fetchTeacherData = async () => {
     try {
       const res = await fetch("/api/teacher/dashboard");
@@ -59,6 +55,10 @@ export default function TeacherDashboard() {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    fetchTeacherData();
+  }, []);
 
   if (loading) {
     return (
@@ -120,7 +120,7 @@ export default function TeacherDashboard() {
         <div className="flex flex-col gap-6">
           {/* Today's Timetable */}
           <div className="card">
-            <h3>Today's Schedule</h3>
+            <h3>Today&apos;s Schedule</h3>
             {schedules.length === 0 ? (
               <p className={styles.emptyText}>No classes scheduled for today.</p>
             ) : (

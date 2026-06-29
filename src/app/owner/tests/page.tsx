@@ -44,14 +44,9 @@ export default function OwnerTests() {
   const [error, setError] = useState("");
 
   // Modal State
-  const [selectedTestId, setSelectedTestId] = useState("");
   const [testDetail, setTestDetail] = useState<TestDetail | null>(null);
   const [detailLoading, setDetailLoading] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
-
-  useEffect(() => {
-    fetchTests();
-  }, []);
 
   const fetchTests = async () => {
     try {
@@ -69,8 +64,11 @@ export default function OwnerTests() {
     }
   };
 
+  useEffect(() => {
+    fetchTests();
+  }, []);
+
   const handleViewResults = async (testId: string) => {
-    setSelectedTestId(testId);
     setDetailLoading(true);
     setIsModalOpen(true);
     try {

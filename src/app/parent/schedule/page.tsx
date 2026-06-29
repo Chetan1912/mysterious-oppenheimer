@@ -30,10 +30,6 @@ export default function ParentSchedule() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
-  useEffect(() => {
-    fetchSchedule();
-  }, []);
-
   const fetchSchedule = async () => {
     try {
       const res = await fetch("/api/parent/schedule");
@@ -49,6 +45,10 @@ export default function ParentSchedule() {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    fetchSchedule();
+  }, []);
 
   const formatTime = (timeStr: string) => {
     return new Date(timeStr).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
@@ -76,7 +76,7 @@ export default function ParentSchedule() {
       {/* Page Header */}
       <div>
         <h2>Class Timetable & Schedule</h2>
-        <p className={styles.subtitle}>Stay updated with your child's weekly classes, holiday announcements, and extra sessions.</p>
+        <p className={styles.subtitle}>Stay updated with your child&apos;s weekly classes, holiday announcements, and extra sessions.</p>
       </div>
 
       {/* Children Schedules */}

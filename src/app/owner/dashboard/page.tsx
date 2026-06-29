@@ -46,10 +46,6 @@ export default function OwnerDashboard() {
   const [error, setError] = useState("");
   const [isReminderSending, setIsReminderSending] = useState<string | null>(null);
 
-  useEffect(() => {
-    fetchDashboardData();
-  }, []);
-
   const fetchDashboardData = async () => {
     try {
       const res = await fetch("/api/owner/dashboard");
@@ -65,6 +61,10 @@ export default function OwnerDashboard() {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    fetchDashboardData();
+  }, []);
 
   const sendManualReminder = async (dueRecordId: string) => {
     setIsReminderSending(dueRecordId);

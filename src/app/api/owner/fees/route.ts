@@ -16,7 +16,7 @@ export async function GET(request: NextRequest) {
     const month = searchParams.get("month") || "";
     const year = searchParams.get("year") || "";
 
-    const whereCondition: any = {};
+    const whereCondition: import("@prisma/client").Prisma.DueRecordWhereInput = {};
 
     if (search) {
       whereCondition.student = {

@@ -1,5 +1,5 @@
 import * as jose from "jose";
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
 
 const JWT_SECRET = process.env.JWT_SECRET || "fallback_super_secret_for_tuition_class_app_2026";

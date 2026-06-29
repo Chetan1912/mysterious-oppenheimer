@@ -20,10 +20,6 @@ export default function AuditLogs() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
-  useEffect(() => {
-    fetchLogs();
-  }, []);
-
   const fetchLogs = async () => {
     try {
       const res = await fetch("/api/owner/audit-logs");
@@ -39,6 +35,10 @@ export default function AuditLogs() {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    fetchLogs();
+  }, []);
 
   const formatDetails = (detailStr: string | null) => {
     if (!detailStr) return "—";

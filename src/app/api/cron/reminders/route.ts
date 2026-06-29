@@ -21,8 +21,6 @@ async function handleCron(request: NextRequest) {
     }
 
     const now = new Date();
-    const currentMonth = now.getMonth() + 1;
-    const currentYear = now.getFullYear();
 
     // 2. Fetch all unpaid/partial due records that are overdue
     // Overdue means: current day is past the FeePlan's dueDateDay

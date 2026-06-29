@@ -15,7 +15,7 @@ export async function GET(request: NextRequest) {
     const batchId = searchParams.get("batchId") || "";
 
     // Build query conditions
-    const whereCondition: any = {};
+    const whereCondition: import("@prisma/client").Prisma.StudentWhereInput = {};
 
     if (search) {
       whereCondition.OR = [

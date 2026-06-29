@@ -28,32 +28,32 @@ export default function StudentDirectory() {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    fetchStudents();
-  }, [search, batchId]);
+    const fetchStudents = async () => {
+      try {
+        const query = new URLSearchParams();
+        if (search) query.append("search", search);
+        if (batchId && batchId !== "all") query.append("batchId", batchId);
 
-  const fetchStudents = async () => {
-    try {
-      const query = new URLSearchParams();
-      if (search) query.append("search", search);
-      if (batchId && batchId !== "all") query.append("batchId", batchId);
-
-      const res = await fetch(`/api/owner/students?${query.toString()}`);
-      if (res.ok) {
-        const json = await res.json();
-        setStudents(json.students || []);
-        // Only set batches on initial load
-        if (batches.length === 0) {
-          setBatches(json.batches || []);
+        const res = await fetch(`/api/owner/students?${query.toString()}`);
+        if (res.ok) {
+          const json = await res.json();
+          setStudents(json.students || []);
+          // Only set batches on initial load
+          if (batches.length === 0) {
+            setBatches(json.batches || []);
+          }
+        } else {
+          setError("Failed to fetch student directory");
         }
-      } else {
-        setError("Failed to fetch student directory");
+      } catch (err) {
+        setError("Network error loading students");
+      } finally {
+        setLoading(false);
       }
-    } catch (err) {
-      setError("Network error loading students");
-    } finally {
-      setLoading(false);
-    }
-  };
+    };
+
+    fetchStudents();
+  }, [search, batchId, batches.length]);
 
   return (
     <div className={styles.container}>

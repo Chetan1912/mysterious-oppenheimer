@@ -33,10 +33,6 @@ export default function TeacherSchedule() {
   const [isExtraClass, setIsExtraClass] = useState(false);
   const [notes, setNotes] = useState("");
 
-  useEffect(() => {
-    fetchScheduleData();
-  }, []);
-
   const fetchScheduleData = async () => {
     try {
       const res = await fetch("/api/teacher/schedule");
@@ -56,6 +52,10 @@ export default function TeacherSchedule() {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    fetchScheduleData();
+  }, []);
 
   const handleCreateSchedule = async (e: React.FormEvent) => {
     e.preventDefault();

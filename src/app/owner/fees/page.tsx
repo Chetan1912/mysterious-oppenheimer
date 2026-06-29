@@ -52,31 +52,31 @@ export default function FeeManagement() {
   const [isBatchSending, setIsBatchSending] = useState(false);
 
   useEffect(() => {
+    const fetchFeesData = async () => {
+      try {
+        const query = new URLSearchParams();
+        if (search) query.append("search", search);
+        if (status && status !== "all") query.append("status", status);
+        if (month && month !== "all") query.append("month", month);
+        if (year && year !== "all") query.append("year", year);
+
+        const res = await fetch(`/api/owner/fees?${query.toString()}`);
+        if (res.ok) {
+          const json = await res.json();
+          setDueRecords(json.dueRecords || []);
+          setSummary(json.summary);
+        } else {
+          setError("Failed to fetch fee records");
+        }
+      } catch (err) {
+        setError("Network error loading fee ledger");
+      } finally {
+        setLoading(false);
+      }
+    };
+
     fetchFeesData();
   }, [search, status, month, year]);
-
-  const fetchFeesData = async () => {
-    try {
-      const query = new URLSearchParams();
-      if (search) query.append("search", search);
-      if (status && status !== "all") query.append("status", status);
-      if (month && month !== "all") query.append("month", month);
-      if (year && year !== "all") query.append("year", year);
-
-      const res = await fetch(`/api/owner/fees?${query.toString()}`);
-      if (res.ok) {
-        const json = await res.json();
-        setDueRecords(json.dueRecords || []);
-        setSummary(json.summary);
-      } else {
-        setError("Failed to fetch fee records");
-      }
-    } catch (err) {
-      setError("Network error loading fee ledger");
-    } finally {
-      setLoading(false);
-    }
-  };
 
   const handleSendReminder = async (dueRecordId: string) => {
     setIsReminderSending(dueRecordId);

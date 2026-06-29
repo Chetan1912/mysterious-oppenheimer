@@ -25,6 +25,18 @@ export default function Header({ onMenuClick, title }: HeaderProps) {
 
   const unreadCount = notifications.filter((n) => !n.isRead).length;
 
+  const fetchNotifications = async () => {
+    try {
+      const res = await fetch("/api/notifications");
+      if (res.ok) {
+        const data = await res.json();
+        setNotifications(data.notifications || []);
+      }
+    } catch (err) {
+      console.error("Error fetching notifications:", err);
+    }
+  };
+
   useEffect(() => {
     // Fetch notifications if user is logged in
     if (user) {
@@ -41,18 +53,6 @@ export default function Header({ onMenuClick, title }: HeaderProps) {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [user]);
-
-  const fetchNotifications = async () => {
-    try {
-      const res = await fetch("/api/notifications");
-      if (res.ok) {
-        const data = await res.json();
-        setNotifications(data.notifications || []);
-      }
-    } catch (err) {
-      console.error("Error fetching notifications:", err);
-    }
-  };
 
   const markAllAsRead = async () => {
     try {

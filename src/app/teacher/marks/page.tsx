@@ -53,106 +53,108 @@ export default function MarksEntry() {
   const [testCreating, setTestCreating] = useState(false);
 
   useEffect(() => {
+    const fetchInitialBatches = async () => {
+      try {
+        const res = await fetch("/api/teacher/marks");
+        if (res.ok) {
+          const json = await res.json();
+          setBatches(json.batches || []);
+          if (json.batches?.length > 0) {
+            setSelectedBatchId(json.batches[0].id);
+          }
+        } else {
+          setError("Failed to load batches");
+        }
+      } catch (err) {
+        setError("Network error loading batches");
+      } finally {
+        setLoading(false);
+      }
+    };
+
     fetchInitialBatches();
   }, []);
-
-  const fetchInitialBatches = async () => {
-    try {
-      const res = await fetch("/api/teacher/marks");
-      if (res.ok) {
-        const json = await res.json();
-        setBatches(json.batches || []);
-        if (json.batches?.length > 0) {
-          setSelectedBatchId(json.batches[0].id);
-        }
-      } else {
-        setError("Failed to load batches");
-      }
-    } catch (err) {
-      setError("Network error loading batches");
-    } finally {
-      setLoading(false);
-    }
-  };
 
   // Load tests & students when batch changes
   useEffect(() => {
     if (!selectedBatchId) return;
+
+    const fetchBatchConfig = async () => {
+      setConfigLoading(true);
+      setTests([]);
+      setStudents([]);
+      setSelectedTestId("");
+      setMarksGrid({});
+      try {
+        const res = await fetch(`/api/teacher/marks?batchId=${selectedBatchId}`);
+        if (res.ok) {
+          const json = await res.json();
+          setTests(json.tests || []);
+          setStudents(json.students || []);
+          
+          // Populate marks grid structure
+          const initialGrid: Record<string, MarkInput> = {};
+          json.students?.forEach((stud: Student) => {
+            initialGrid[stud.id] = {
+              studentId: stud.id,
+              score: "",
+              remarks: "",
+            };
+          });
+          setMarksGrid(initialGrid);
+
+          if (json.tests?.length > 0) {
+            setSelectedTestId(json.tests[0].id);
+          }
+        }
+      } catch (err) {
+        console.error("Error loading batch config:", err);
+      } finally {
+        setConfigLoading(false);
+      }
+    };
+
     fetchBatchConfig();
   }, [selectedBatchId]);
-
-  const fetchBatchConfig = async () => {
-    setConfigLoading(true);
-    setTests([]);
-    setStudents([]);
-    setSelectedTestId("");
-    setMarksGrid({});
-    try {
-      const res = await fetch(`/api/teacher/marks?batchId=${selectedBatchId}`);
-      if (res.ok) {
-        const json = await res.json();
-        setTests(json.tests || []);
-        setStudents(json.students || []);
-        
-        // Populate marks grid structure
-        const initialGrid: Record<string, MarkInput> = {};
-        json.students?.forEach((stud: Student) => {
-          initialGrid[stud.id] = {
-            studentId: stud.id,
-            score: "",
-            remarks: "",
-          };
-        });
-        setMarksGrid(initialGrid);
-
-        if (json.tests?.length > 0) {
-          setSelectedTestId(json.tests[0].id);
-        }
-      }
-    } catch (err) {
-      console.error("Error loading batch config:", err);
-    } finally {
-      setConfigLoading(false);
-    }
-  };
 
   // Load existing marks when test changes
   useEffect(() => {
     if (!selectedTestId) return;
-    fetchTestMarks();
-  }, [selectedTestId]);
 
-  const fetchTestMarks = async () => {
-    try {
-      const res = await fetch(`/api/teacher/marks?batchId=${selectedBatchId}&testId=${selectedTestId}`);
-      if (res.ok) {
-        const json = await res.json();
-        const existing = json.existingMarks || [];
-        
-        // Update grid with existing marks
-        setMarksGrid((prev) => {
-          const updated = { ...prev };
-          // Reset scores first
-          Object.keys(updated).forEach((key) => {
-            updated[key] = { ...updated[key], score: "", remarks: "" };
+    const fetchTestMarks = async () => {
+      try {
+        const res = await fetch(`/api/teacher/marks?batchId=${selectedBatchId}&testId=${selectedTestId}`);
+        if (res.ok) {
+          const json = await res.json();
+          const existing = json.existingMarks || [];
+          
+          // Update grid with existing marks
+          setMarksGrid((prev) => {
+            const updated = { ...prev };
+            // Reset scores first
+            Object.keys(updated).forEach((key) => {
+              updated[key] = { ...updated[key], score: "", remarks: "" };
+            });
+            // Populate existing
+            existing.forEach((m: { studentId: string; score: number | string; remarks?: string | null }) => {
+              if (updated[m.studentId]) {
+                updated[m.studentId] = {
+                  studentId: m.studentId,
+                  score: String(m.score),
+                  remarks: m.remarks || "",
+                };
+              }
+            });
+            return updated;
           });
-          // Populate existing
-          existing.forEach((m: any) => {
-            if (updated[m.studentId]) {
-              updated[m.studentId] = {
-                studentId: m.studentId,
-                score: String(m.score),
-                remarks: m.remarks || "",
-              };
-            }
-          });
-          return updated;
-        });
+        }
+      } catch (err) {
+        console.error("Error loading marks:", err);
       }
-    } catch (err) {
-      console.error("Error loading marks:", err);
-    }
-  };
+    };
+
+    fetchTestMarks();
+  }, [selectedTestId, selectedBatchId]);
 
   const handleScoreChange = (studentId: string, value: string) => {
     const activeTest = tests.find((t) => t.id === selectedTestId);

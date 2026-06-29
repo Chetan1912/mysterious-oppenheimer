@@ -43,8 +43,7 @@ export async function POST(request: NextRequest) {
           due.student.name,
           monthName,
           due.year,
-          balance,
-          due.id
+          balance
         );
 
         if (emailSent) {
@@ -114,8 +113,7 @@ export async function POST(request: NextRequest) {
       due.student.name,
       monthName,
       due.year,
-      balance,
-      due.id
+      balance
     );
 
     if (emailSent) {
@@ -166,8 +164,7 @@ async function sendReminderEmail(
   studentName: string,
   month: string,
   year: number,
-  balance: number,
-  dueId: string
+  balance: number
 ): Promise<boolean> {
   const subject = `Fee Payment Reminder: ${month} ${year} - Apex Academy`;
 

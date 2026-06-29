@@ -23,10 +23,6 @@ export default function OwnerNotices() {
   const [targetParents, setTargetParents] = useState(true);
   const [targetTeachers, setTargetTeachers] = useState(true);
 
-  useEffect(() => {
-    fetchNotices();
-  }, []);
-
   const fetchNotices = async () => {
     try {
       const res = await fetch("/api/owner/notices");
@@ -42,6 +38,10 @@ export default function OwnerNotices() {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    fetchNotices();
+  }, []);
 
   const handlePostNotice = async (e: React.FormEvent) => {
     e.preventDefault();

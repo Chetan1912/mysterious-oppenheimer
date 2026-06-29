@@ -49,10 +49,6 @@ export default function ParentDashboard() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
-  useEffect(() => {
-    fetchParentData();
-  }, []);
-
   const fetchParentData = async () => {
     try {
       const res = await fetch("/api/parent/dashboard");
@@ -68,6 +64,10 @@ export default function ParentDashboard() {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    fetchParentData();
+  }, []);
 
   if (loading) {
     return (
@@ -143,7 +143,7 @@ export default function ParentDashboard() {
                   {/* Today's Schedule Card */}
                   <div className={styles.statusCard}>
                     <div className="flex justify-between align-center">
-                      <span className={styles.cardTitle}>Today's Schedule</span>
+                      <span className={styles.cardTitle}>Today&apos;s Schedule</span>
                       <Link href="/parent/schedule" className={styles.cardLink}>Timetable</Link>
                     </div>
                     <div className={styles.scheduleValWrapper}>

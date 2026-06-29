@@ -35,10 +35,6 @@ export default function StudentAdmission() {
   const [feePlanId, setFeePlanId] = useState("");
   const [joiningDate, setJoiningDate] = useState(new Date().toISOString().split("T")[0]);
 
-  useEffect(() => {
-    fetchFormData();
-  }, []);
-
   const fetchFormData = async () => {
     try {
       const res = await fetch("/api/owner/students/admission");
@@ -57,6 +53,10 @@ export default function StudentAdmission() {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    fetchFormData();
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

@@ -35,10 +35,6 @@ export default function ParentFees() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
-  useEffect(() => {
-    fetchFees();
-  }, []);
-
   const fetchFees = async () => {
     try {
       const res = await fetch("/api/parent/fees");
@@ -54,6 +50,10 @@ export default function ParentFees() {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    fetchFees();
+  }, []);
 
   const getMonthName = (monthNum: number) => {
     return new Date(2000, monthNum - 1).toLocaleString("default", { month: "long" });

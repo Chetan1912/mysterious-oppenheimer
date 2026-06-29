@@ -41,10 +41,6 @@ export default function OwnerReports() {
   const [error, setError] = useState("");
   const [activeTab, setActiveTab] = useState<"revenue" | "academics" | "students">("revenue");
 
-  useEffect(() => {
-    fetchReports();
-  }, []);
-
   const fetchReports = async () => {
     try {
       const res = await fetch("/api/owner/reports");
@@ -60,6 +56,10 @@ export default function OwnerReports() {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    fetchReports();
+  }, []);
 
   const getMonthName = (monthNum: number) => {
     return new Date(2000, monthNum - 1).toLocaleString("default", { month: "long" });

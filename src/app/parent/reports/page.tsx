@@ -26,10 +26,6 @@ export default function ParentReports() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
-  useEffect(() => {
-    fetchReports();
-  }, []);
-
   const fetchReports = async () => {
     try {
       const res = await fetch("/api/parent/reports");
@@ -45,6 +41,10 @@ export default function ParentReports() {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    fetchReports();
+  }, []);
 
   if (loading) {
     return (
@@ -64,7 +64,7 @@ export default function ParentReports() {
       {/* Page Header */}
       <div>
         <h2>Academic Performance Reports</h2>
-        <p className={styles.subtitle}>Track your child's examination scores, progress trends, and teacher feedback.</p>
+        <p className={styles.subtitle}>Track your child&apos;s examination scores, progress trends, and teacher feedback.</p>
       </div>
 
       {/* Children Reports */}

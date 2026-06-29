@@ -1,0 +1,141 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.subtitle {
+  font-size: 0.875rem;
+  color: var(--neutral-500);
+  margin-top: 0.25rem;
+}
+
+.loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 50vh;
+  gap: 1rem;
+  color: var(--neutral-500);
+}
+
+.childHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  border-bottom: 1px solid var(--neutral-100);
+  padding-bottom: 1rem;
+}
+
+.batchName {
+  font-size: 0.875rem;
+  color: var(--neutral-500);
+  margin-top: 0.25rem;
+}
+
+.admissionId {
+  font-size: 0.8125rem;
+  color: var(--neutral-500);
+  font-family: monospace;
+}
+
+.emptyText {
+  padding: 2.5rem 0;
+  text-align: center;
+  color: var(--neutral-400);
+  font-size: 0.875rem;
+}
+
+/* Timeline */
+.scheduleTimeline {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  margin-top: 1.5rem;
+}
+
+.scheduleItem {
+  display: flex;
+  padding: 1.25rem;
+  background-color: var(--neutral-50);
+  border: 1px solid var(--neutral-200);
+  border-radius: var(--radius-md);
+  gap: 1.5rem;
+  transition: var(--transition-all);
+}
+
+.scheduleItem:hover {
+  background-color: white;
+  box-shadow: var(--shadow-sm);
+  transform: translateY(-1px);
+}
+
+.scheduleItem.extraClass {
+  border-left: 4px solid var(--warning);
+}
+
+.scheduleItem.cancelledClass {
+  border-left: 4px solid var(--danger);
+  opacity: 0.7;
+}
+
+.timeCol {
+  flex: 0 0 180px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-right: 1px solid var(--neutral-200);
+  padding-right: 1.5rem;
+}
+
+.dateText {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--neutral-800);
+}
+
+.timeText {
+  font-size: 0.8125rem;
+  color: var(--neutral-500);
+  margin-top: 0.25rem;
+}
+
+.infoCol {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.teacherName {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--neutral-900);
+}
+
+.notesText {
+  font-size: 0.78125rem;
+  color: var(--neutral-600);
+  background-color: white;
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--neutral-200);
+}
+
+/* Mobile responsive */
+@media (max-width: 640px) {
+  .scheduleItem {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .timeCol {
+    flex: none;
+    border-right: none;
+    border-bottom: 1px solid var(--neutral-200);
+    padding-right: 0;
+    padding-bottom: 0.75rem;
+  }
+}

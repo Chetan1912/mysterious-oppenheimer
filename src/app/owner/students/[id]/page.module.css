@@ -1,0 +1,245 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.backBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--neutral-500);
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition-all);
+  align-self: flex-start;
+}
+
+.backBtn:hover {
+  color: var(--primary);
+}
+
+.loading, .error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 50vh;
+  gap: 1rem;
+  color: var(--neutral-500);
+}
+
+/* Profile Card Styling */
+.profileCard {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 2rem;
+}
+
+.profileMain {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary) 0%, #818cf8 100%);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.75rem;
+  font-weight: 700;
+  box-shadow: 0 4px 15px rgba(79, 70, 229, 0.2);
+}
+
+.profileMeta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.studentName {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--neutral-900);
+}
+
+.admissionIdBadge {
+  background-color: var(--neutral-100);
+  border: 1px solid var(--neutral-200);
+  color: var(--neutral-600);
+  padding: 0.125rem 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+}
+
+.batchName {
+  font-size: 0.875rem;
+  color: var(--neutral-600);
+  font-weight: 500;
+}
+
+.joiningDate {
+  font-size: 0.75rem;
+  color: var(--neutral-400);
+}
+
+.contactDetails {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--neutral-200);
+}
+
+.contactCol {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.contactLabel {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--neutral-500);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.contactVal {
+  font-size: 0.875rem;
+  color: var(--neutral-800);
+  font-weight: 500;
+}
+
+/* Tabs */
+.tabContainer {
+  display: flex;
+  border-bottom: 1px solid var(--neutral-200);
+  gap: 1.5rem;
+}
+
+.tab {
+  padding: 0.75rem 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--neutral-500);
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  transition: var(--transition-all);
+}
+
+.tab:hover {
+  color: var(--neutral-900);
+}
+
+.activeTab {
+  color: var(--primary);
+  border-bottom-color: var(--primary);
+}
+
+/* Tables styling */
+.methodBadge {
+  background-color: var(--neutral-100);
+  color: var(--neutral-700);
+  padding: 0.125rem 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  border-radius: var(--radius-sm);
+}
+
+.amountText {
+  font-weight: 600;
+  color: var(--neutral-900);
+  text-align: right;
+}
+
+.percentText {
+  font-weight: 700;
+}
+
+/* Notes section */
+.notesBox {
+  padding: 1rem;
+  background-color: var(--neutral-50);
+  border-radius: var(--radius-md);
+  border: 1px dashed var(--neutral-300);
+}
+
+.notesText {
+  font-size: 0.875rem;
+  color: var(--neutral-700);
+  line-height: 1.6;
+  white-space: pre-line;
+}
+
+/* Modal Overlay */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(15, 23, 42, 0.5);
+  backdrop-filter: blur(4px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+.modalCard {
+  width: 100%;
+  max-width: 460px;
+  background-color: white;
+  padding: 2rem;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+}
+
+.closeBtn {
+  color: var(--neutral-400);
+  transition: var(--transition-all);
+}
+
+.closeBtn:hover {
+  color: var(--neutral-900);
+}
+
+.modalSummary {
+  background-color: var(--neutral-50);
+  border: 1px solid var(--neutral-200);
+  border-radius: var(--radius-md);
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+}
+
+.modalSummary p {
+  color: var(--neutral-600);
+  display: flex;
+  justify-content: space-between;
+}
+
+.modalSummary strong {
+  color: var(--neutral-900);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .contactDetails {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}

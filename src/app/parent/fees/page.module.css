@@ -1,0 +1,92 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.subtitle {
+  font-size: 0.875rem;
+  color: var(--neutral-500);
+  margin-top: 0.25rem;
+}
+
+.loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 50vh;
+  gap: 1rem;
+  color: var(--neutral-500);
+}
+
+.mainGrid {
+  grid-template-columns: 1.8fr 1fr;
+}
+
+@media (max-width: 1024px) {
+  .mainGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.childHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--neutral-100);
+  padding-bottom: 1rem;
+}
+
+.admissionId {
+  font-size: 0.8125rem;
+  color: var(--neutral-500);
+  font-family: monospace;
+}
+
+.methodBadge {
+  background-color: var(--neutral-100);
+  color: var(--neutral-700);
+  padding: 0.125rem 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  border-radius: var(--radius-sm);
+}
+
+.amountText {
+  font-weight: 600;
+  color: var(--neutral-900);
+  text-align: right;
+}
+
+/* Payment Instructions */
+.instructionText {
+  margin-bottom: 1.5rem;
+}
+
+.paymentMethodItem {
+  padding: 1.25rem;
+  background-color: var(--neutral-50);
+  border: 1px solid var(--neutral-200);
+  border-radius: var(--radius-md);
+}
+
+.methodTitle {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--primary);
+  display: block;
+  margin-bottom: 0.75rem;
+}
+
+.methodDetail {
+  font-size: 0.8125rem;
+  color: var(--neutral-700);
+  line-height: 1.5;
+  margin-bottom: 0.25rem;
+}
+
+.methodDetail:last-child {
+  margin-bottom: 0;
+}

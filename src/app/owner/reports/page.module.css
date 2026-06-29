@@ -1,0 +1,131 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.subtitle {
+  font-size: 0.875rem;
+  color: var(--neutral-500);
+  margin-top: 0.25rem;
+}
+
+.loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 50vh;
+  gap: 1rem;
+  color: var(--neutral-500);
+}
+
+/* Tabs */
+.tabContainer {
+  display: flex;
+  border-bottom: 1px solid var(--neutral-200);
+  gap: 1.5rem;
+}
+
+.tab {
+  padding: 0.75rem 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--neutral-500);
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  transition: var(--transition-all);
+}
+
+.tab:hover {
+  color: var(--neutral-900);
+}
+
+.activeTab {
+  color: var(--primary);
+  border-bottom-color: var(--primary);
+}
+
+.tableTitle {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--neutral-800);
+  margin-bottom: 1rem;
+}
+
+.performanceLabel {
+  font-size: 0.8125rem;
+}
+
+/* Print Header (hidden on screen) */
+.printHeader {
+  display: none;
+}
+
+/* Print Styles */
+@media print {
+  /* Hide UI wrappers */
+  :global(.no-print),
+  .tabContainer,
+  .header button {
+    display: none !important;
+  }
+
+  /* Reset layout margins */
+  :global(body) {
+    background-color: white !important;
+    color: black !important;
+  }
+
+  :global(main) {
+    margin-left: 0 !important;
+    margin-top: 0 !important;
+    padding: 0 !important;
+  }
+
+  :global(header),
+  :global(aside) {
+    display: none !important;
+  }
+
+  .container {
+    gap: 1rem !important;
+  }
+
+  .card {
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+  }
+
+  .table-container {
+    border: 1px solid #000 !important;
+    border-radius: 0 !important;
+  }
+
+  .table th {
+    background-color: #f1f5f9 !important;
+    color: black !important;
+    border-bottom: 2px solid #000 !important;
+  }
+
+  .table td {
+    border-bottom: 1px solid #cbd5e1 !important;
+    color: black !important;
+  }
+
+  .printHeader {
+    display: block !important;
+    margin-bottom: 2rem;
+  }
+
+  .printHeader h1 {
+    font-size: 1.75rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .printHeader p {
+    font-size: 0.75rem;
+    color: #475569;
+  }
+}

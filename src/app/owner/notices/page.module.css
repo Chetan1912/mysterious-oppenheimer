@@ -1,0 +1,100 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.subtitle {
+  font-size: 0.875rem;
+  color: var(--neutral-500);
+  margin-top: 0.25rem;
+}
+
+.loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 50vh;
+  gap: 1rem;
+  color: var(--neutral-500);
+}
+
+.mainGrid {
+  grid-template-columns: 1fr 1.3fr;
+}
+
+@media (max-width: 1024px) {
+  .mainGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.emptyText {
+  padding: 2rem;
+  text-align: center;
+  color: var(--neutral-400);
+  font-size: 0.875rem;
+}
+
+/* Timeline */
+.noticeTimeline {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  max-height: 550px;
+  overflow-y: auto;
+  padding-right: 0.5rem;
+}
+
+.noticeItem {
+  padding: 1.25rem;
+  background-color: var(--neutral-50);
+  border: 1px solid var(--neutral-200);
+  border-left: 4px solid var(--primary);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  transition: var(--transition-all);
+}
+
+.noticeItem:hover {
+  background-color: white;
+  box-shadow: var(--shadow-sm);
+}
+
+.noticeHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.noticeHeader strong {
+  font-size: 0.9375rem;
+  color: var(--neutral-900);
+}
+
+.noticeDate {
+  font-size: 0.75rem;
+  color: var(--neutral-400);
+  white-space: nowrap;
+}
+
+.noticeBody {
+  font-size: 0.8125rem;
+  color: var(--neutral-600);
+  line-height: 1.5;
+  white-space: pre-wrap;
+}
+
+.roleBadge {
+  background-color: var(--neutral-200);
+  color: var(--neutral-700);
+  padding: 0.125rem 0.5rem;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+  text-transform: uppercase;
+}

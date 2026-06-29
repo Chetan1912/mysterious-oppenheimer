@@ -1,0 +1,210 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+datasource db {
+  provider = "postgresql"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum Role {
+  OWNER
+  TEACHER
+  PARENT
+}
+
+enum PaymentStatus {
+  PAID
+  PARTIAL
+  PENDING
+  OVERDUE
+}
+
+model User {
+  id            String    @id @default(uuid())
+  email         String    @unique
+  passwordHash  String
+  name          String
+  role          Role
+  phone         String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  // Relations
+  teacher       Teacher?
+  parent        Parent?
+  auditLogs     AuditLog[]
+}
+
+model Teacher {
+  id          String       @id @default(uuid())
+  userId      String       @unique
+  user        User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  batches     Batch[]      // Batches this teacher handles
+  schedules   Schedule[]
+  createdAt   DateTime     @default(now())
+}
+
+model Parent {
+  id          String       @id @default(uuid())
+  userId      String       @unique
+  user        User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  students    Student[]    // Children registered under this parent
+  createdAt   DateTime     @default(now())
+}
+
+model Student {
+  id            String         @id @default(uuid())
+  admissionId   String         @unique // Custom generated (e.g., INST-2026-001)
+  name          String
+  joiningDate   DateTime       @default(now())
+  address       String?
+  notes         String?        // Student background notes
+  parentId      String
+  parent        Parent         @relation(fields: [parentId], references: [id], onDelete: Cascade)
+  batchId       String?
+  batch         Batch?         @relation(fields: [batchId], references: [id])
+  feePlanId     String?
+  feePlan       FeePlan?       @relation(fields: [feePlanId], references: [id])
+  payments      Payment[]
+  dueRecords    DueRecord[]
+  marks         Marks[]
+  documents     Document[]
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+}
+
+model Batch {
+  id          String       @id @default(uuid())
+  name        String       // e.g., "Grade 10 - Mathematics"
+  description String?
+  teacherId   String?
+  teacher     Teacher?     @relation(fields: [teacherId], references: [id])
+  students    Student[]
+  schedules   Schedule[]
+  tests       Test[]
+  createdAt   DateTime     @default(now())
+}
+
+model FeePlan {
+  id            String       @id @default(uuid())
+  name          String       // e.g., "Standard Monthly Plan"
+  amount        Decimal      // e.g., 10000.00
+  dueDateDay    Int          // Day of the month fee is due (e.g., 5)
+  lateFeeRule   Decimal      @default(0.00) // Late fee amount (e.g., 500.00)
+  students      Student[]
+  createdAt     DateTime     @default(now())
+}
+
+model DueRecord {
+  id            String        @id @default(uuid())
+  studentId     String
+  student       Student       @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  month         Int           // 1 to 12
+  year          Int           // e.g., 2026
+  baseAmount    Decimal
+  lateFee       Decimal       @default(0.00)
+  totalDue      Decimal       // baseAmount + lateFee
+  paidAmount    Decimal       @default(0.00)
+  status        PaymentStatus @default(PENDING)
+  lastReminder  DateTime?
+  reminderCount Int           @default(0)
+  payments      Payment[]
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+
+  @@unique([studentId, month, year])
+}
+
+model Payment {
+  id            String       @id @default(uuid())
+  dueRecordId   String
+  dueRecord     DueRecord    @relation(fields: [dueRecordId], references: [id], onDelete: Cascade)
+  studentId     String
+  student       Student      @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  amountPaid    Decimal
+  paymentDate   DateTime     @default(now())
+  paymentMethod String       // e.g., "UPI", "Cash", "Bank Transfer"
+  receiptUrl    String?      // PDF/Image copy of receipt
+  notes         String?
+  createdAt     DateTime     @default(now())
+}
+
+model Test {
+  id          String       @id @default(uuid())
+  title       String       // e.g., "Algebra Midterm"
+  maxMarks    Int
+  testDate    DateTime
+  batchId     String
+  batch       Batch        @relation(fields: [batchId], references: [id], onDelete: Cascade)
+  marks       Marks[]
+  createdAt   DateTime     @default(now())
+}
+
+model Marks {
+  id          String       @id @default(uuid())
+  testId      String
+  test        Test         @relation(fields: [testId], references: [id], onDelete: Cascade)
+  studentId   String
+  student     Student      @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  score       Decimal
+  remarks     String?
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+
+  @@unique([testId, studentId])
+}
+
+model Schedule {
+  id          String       @id @default(uuid())
+  batchId     String
+  batch       Batch        @relation(fields: [batchId], references: [id], onDelete: Cascade)
+  teacherId   String
+  teacher     Teacher      @relation(fields: [teacherId], references: [id], onDelete: Cascade)
+  startTime   DateTime
+  endTime     DateTime
+  isExtraClass Boolean     @default(false)
+  isCancelled  Boolean     @default(false)
+  notes       String?      // e.g., "Bring geometry box"
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+}
+
+model Notice {
+  id          String       @id @default(uuid())
+  title       String
+  content     String
+  targetRoles Role[]       // e.g., [PARENT, TEACHER] to filter who sees it
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+}
+
+model Notification {
+  id          String       @id @default(uuid())
+  userId      String
+  title       String
+  message     String
+  isRead      Boolean      @default(false)
+  createdAt   DateTime     @default(now())
+}
+
+model AuditLog {
+  id          String       @id @default(uuid())
+  userId      String
+  action      String       // e.g., "CREATE_STUDENT", "RECORD_PAYMENT"
+  details     String?      // JSON string with change details
+  ipAddress   String?
+  createdAt   DateTime     @default(now())
+  user        User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Document {
+  id          String       @id @default(uuid())
+  studentId   String
+  student     Student      @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  name        String       // e.g., "Aadhar Card"
+  fileUrl     String
+  createdAt   DateTime     @default(now())
+}

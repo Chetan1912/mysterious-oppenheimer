@@ -1,0 +1,271 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.loading, .error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 60vh;
+  gap: 1rem;
+  color: var(--neutral-500);
+}
+
+.mainGrid {
+  grid-template-columns: 1.6fr 1fr;
+}
+
+@media (max-width: 1024px) {
+  .mainGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Child Card */
+.childCard {
+  padding: 2rem;
+}
+
+.childHeader {
+  border-bottom: 1px solid var(--neutral-200);
+  padding-bottom: 1.25rem;
+}
+
+.avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary) 0%, #818cf8 100%);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.25rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.childName {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--neutral-900);
+}
+
+.admissionId {
+  font-size: 0.75rem;
+  color: var(--neutral-500);
+  font-family: monospace;
+}
+
+.batchBadge {
+  background-color: var(--primary-light);
+  color: var(--primary);
+  padding: 0.25rem 0.625rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+}
+
+/* Status Card */
+.statusCard {
+  background-color: var(--neutral-50);
+  border: 1px solid var(--neutral-200);
+  border-radius: var(--radius-md);
+  padding: 1rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.cardTitle {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--neutral-500);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.cardLink {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--primary);
+}
+
+.cardLink:hover {
+  text-decoration: underline;
+}
+
+.statusValWrapper {
+  display: flex;
+  align-items: baseline;
+}
+
+.pendingVal {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--danger);
+}
+
+.dueAlert {
+  font-size: 0.75rem;
+  color: var(--danger);
+  font-weight: 500;
+  display: block;
+}
+
+.paidVal {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--success);
+}
+
+.paidAlert {
+  font-size: 0.75rem;
+  color: var(--success);
+  font-weight: 500;
+  display: block;
+}
+
+.noClassesText {
+  color: var(--neutral-400);
+  font-size: 0.8125rem;
+  font-style: italic;
+}
+
+.scheduleValWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+
+.scheduleItemMini {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.classTime {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--neutral-800);
+}
+
+.extraClassLabel {
+  background-color: var(--warning-bg);
+  color: var(--warning);
+  font-size: 0.65rem;
+  font-weight: 600;
+  padding: 0.0625rem 0.35rem;
+  border-radius: 4px;
+}
+
+.cancelledLabel {
+  background-color: var(--danger-bg);
+  color: var(--danger);
+  font-size: 0.65rem;
+  font-weight: 600;
+  padding: 0.0625rem 0.35rem;
+  border-radius: 4px;
+}
+
+/* Academics Section */
+.sectionTitle {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--neutral-700);
+}
+
+.emptyText {
+  color: var(--neutral-400);
+  font-size: 0.8125rem;
+  text-align: center;
+  padding: 1rem 0;
+}
+
+.marksList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.markItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  background-color: var(--neutral-50);
+  border: 1px solid var(--neutral-200);
+  border-radius: var(--radius-md);
+}
+
+.testTitle {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--neutral-800);
+  display: block;
+}
+
+.testDate {
+  font-size: 0.75rem;
+  color: var(--neutral-400);
+  display: block;
+  margin-top: 0.125rem;
+}
+
+.scoreText {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--neutral-900);
+  display: block;
+}
+
+.percentText {
+  font-size: 0.75rem;
+  font-weight: 700;
+  display: block;
+  margin-top: 0.125rem;
+}
+
+/* Notice Board */
+.noticeList {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1.25rem;
+}
+
+.noticeItem {
+  padding: 1rem;
+  background-color: var(--neutral-50);
+  border-left: 3px solid var(--primary);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  transition: var(--transition-all);
+}
+
+.noticeItem:hover {
+  background-color: white;
+  box-shadow: var(--shadow-sm);
+  transform: translateX(2px);
+}
+
+.noticeTitle {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--neutral-900);
+  margin-bottom: 0.25rem;
+}
+
+.noticeBody {
+  font-size: 0.75rem;
+  color: var(--neutral-600);
+  line-height: 1.5;
+  margin-bottom: 0.5rem;
+}
+
+.noticeDate {
+  font-size: 0.6875rem;
+  color: var(--neutral-400);
+}

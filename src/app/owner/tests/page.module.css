@@ -1,0 +1,162 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.subtitle {
+  font-size: 0.875rem;
+  color: var(--neutral-500);
+  margin-top: 0.25rem;
+}
+
+.loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 50vh;
+  gap: 1rem;
+  color: var(--neutral-500);
+}
+
+.batchBadge {
+  background-color: var(--primary-light);
+  color: var(--primary);
+  padding: 0.25rem 0.625rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+}
+
+/* Modal */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(15, 23, 42, 0.5);
+  backdrop-filter: blur(4px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+.modalCard {
+  width: 100%;
+  max-width: 500px;
+  background-color: white;
+  padding: 2rem;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+}
+
+.closeBtn {
+  color: var(--neutral-400);
+  transition: var(--transition-all);
+}
+
+.closeBtn:hover {
+  color: var(--neutral-900);
+}
+
+.modalSubtitle {
+  font-size: 0.8125rem;
+  color: var(--neutral-500);
+  margin-top: 0.25rem;
+}
+
+.modalContent {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.statsGrid {
+  margin-top: 0.5rem;
+}
+
+.statBox {
+  background-color: var(--neutral-50);
+  border: 1px solid var(--neutral-200);
+  border-radius: var(--radius-md);
+  padding: 0.75rem 1rem;
+  text-align: center;
+}
+
+.statLabel {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: var(--neutral-500);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  display: block;
+}
+
+.statVal {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--neutral-900);
+  margin-top: 0.25rem;
+}
+
+/* Scores list */
+.scoresList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  max-height: 250px;
+  overflow-y: auto;
+  padding-right: 0.5rem;
+}
+
+.scoreRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  background-color: var(--neutral-50);
+  border: 1px solid var(--neutral-100);
+  border-radius: var(--radius-md);
+}
+
+.studentName {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--neutral-900);
+  display: block;
+}
+
+.studentId {
+  font-size: 0.75rem;
+  color: var(--neutral-500);
+  font-family: monospace;
+  display: block;
+  margin-top: 0.125rem;
+}
+
+.remarksText {
+  font-size: 0.75rem;
+  color: var(--neutral-500);
+  font-style: italic;
+  margin-top: 0.25rem;
+  background-color: white;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  border: 1px solid var(--neutral-100);
+}
+
+.scoreText {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--neutral-900);
+  display: block;
+}
+
+.percentText {
+  display: block;
+  margin-top: 0.125rem;
+}

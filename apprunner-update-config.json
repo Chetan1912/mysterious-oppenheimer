@@ -1,0 +1,19 @@
+{
+  "ServiceArn": "arn:aws:apprunner:ap-south-1:675254204326:service/mysterious-oppenheimer-service/478039690d8d47e5b51f47ee691251f5",
+  "SourceConfiguration": {
+    "ImageRepository": {
+      "ImageIdentifier": "675254204326.dkr.ecr.ap-south-1.amazonaws.com/mysterious-oppenheimer:latest",
+      "ImageRepositoryType": "ECR",
+      "ImageConfiguration": {
+        "Port": "3000",
+        "RuntimeEnvironmentVariables": {
+          "NODE_ENV": "production",
+          "PORT": "3000",
+          "DATABASE_URL": "postgresql://postgres:adminpassword123@mysterious-oppenheimer-db.cfuikim4232x.ap-south-1.rds.amazonaws.com:5432/postgres?schema=public",
+          "JWT_SECRET": "super_secret_session_token_key_2026_for_apex",
+          "CRON_SECRET": "fallback_cron_secret_token_2026"
+        }
+      }
+    }
+  }
+}

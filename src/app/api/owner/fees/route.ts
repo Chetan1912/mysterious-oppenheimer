@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getSession } from "@/lib/auth";
 import db from "@/lib/db";
+import { PaymentStatus } from "@prisma/client";
 
 export async function GET(request: NextRequest) {
   try {
@@ -25,7 +26,7 @@ export async function GET(request: NextRequest) {
     }
 
     if (status && status !== "all") {
-      whereCondition.status = status;
+      whereCondition.status = status as PaymentStatus;
     }
 
     if (month && month !== "all") {

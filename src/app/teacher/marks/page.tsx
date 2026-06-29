@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import styles from "./page.module.css";
 
 interface Batch {
@@ -76,46 +76,45 @@ export default function MarksEntry() {
   }, []);
 
   // Load tests & students when batch changes
-  useEffect(() => {
+  const fetchBatchConfig = useCallback(async () => {
     if (!selectedBatchId) return;
+    setConfigLoading(true);
+    setTests([]);
+    setStudents([]);
+    setSelectedTestId("");
+    setMarksGrid({});
+    try {
+      const res = await fetch(`/api/teacher/marks?batchId=${selectedBatchId}`);
+      if (res.ok) {
+        const json = await res.json();
+        setTests(json.tests || []);
+        setStudents(json.students || []);
+        
+        // Populate marks grid structure
+        const initialGrid: Record<string, MarkInput> = {};
+        json.students?.forEach((stud: Student) => {
+          initialGrid[stud.id] = {
+            studentId: stud.id,
+            score: "",
+            remarks: "",
+          };
+        });
+        setMarksGrid(initialGrid);
 
-    const fetchBatchConfig = async () => {
-      setConfigLoading(true);
-      setTests([]);
-      setStudents([]);
-      setSelectedTestId("");
-      setMarksGrid({});
-      try {
-        const res = await fetch(`/api/teacher/marks?batchId=${selectedBatchId}`);
-        if (res.ok) {
-          const json = await res.json();
-          setTests(json.tests || []);
-          setStudents(json.students || []);
-          
-          // Populate marks grid structure
-          const initialGrid: Record<string, MarkInput> = {};
-          json.students?.forEach((stud: Student) => {
-            initialGrid[stud.id] = {
-              studentId: stud.id,
-              score: "",
-              remarks: "",
-            };
-          });
-          setMarksGrid(initialGrid);
-
-          if (json.tests?.length > 0) {
-            setSelectedTestId(json.tests[0].id);
-          }
+        if (json.tests?.length > 0) {
+          setSelectedTestId(json.tests[0].id);
         }
-      } catch (err) {
-        console.error("Error loading batch config:", err);
-      } finally {
-        setConfigLoading(false);
       }
-    };
-
-    fetchBatchConfig();
+    } catch (err) {
+      console.error("Error loading batch config:", err);
+    } finally {
+      setConfigLoading(false);
+    }
   }, [selectedBatchId]);
+
+  useEffect(() => {
+    fetchBatchConfig();
+  }, [fetchBatchConfig]);
 
   // Load existing marks when test changes
   useEffect(() => {

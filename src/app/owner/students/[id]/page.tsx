@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, use } from "react";
+import React, { useState, useEffect, useCallback, use } from "react";
 import { useRouter } from "next/navigation";
 import styles from "./page.module.css";
 
@@ -70,25 +70,25 @@ export default function StudentProfile({ params }: { params: Promise<{ id: strin
   const [paymentNotes, setPaymentNotes] = useState("");
   const [modalSubmitting, setModalSubmitting] = useState(false);
 
-  useEffect(() => {
-    const fetchStudentProfile = async () => {
-      try {
-        const res = await fetch(`/api/owner/students/${id}`);
-        if (res.ok) {
-          const json = await res.json();
-          setStudent(json.student);
-        } else {
-          setError("Failed to load student profile");
-        }
-      } catch (err) {
-        setError("Network error loading student profile");
-      } finally {
-        setLoading(false);
+  const fetchStudentProfile = useCallback(async () => {
+    try {
+      const res = await fetch(`/api/owner/students/${id}`);
+      if (res.ok) {
+        const json = await res.json();
+        setStudent(json.student);
+      } else {
+        setError("Failed to load student profile");
       }
-    };
-
-    fetchStudentProfile();
+    } catch (err) {
+      setError("Network error loading student profile");
+    } finally {
+      setLoading(false);
+    }
   }, [id]);
+
+  useEffect(() => {
+    fetchStudentProfile();
+  }, [fetchStudentProfile]);
 
   const openPayModal = (due: DueRecord) => {
     setSelectedDue(due);

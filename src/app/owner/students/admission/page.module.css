@@ -97,3 +97,20 @@
   font-family: monospace;
   font-size: 0.8125rem;
 }
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0;
+  }
+  .successCard {
+    padding: 2rem 1.25rem;
+    margin: 2rem auto;
+  }
+}
+
+@media (max-width: 640px) {
+  .detailRow {
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+}

@@ -349,11 +349,26 @@ button {
     gap: 1rem !important;
   }
   
-  /* Touch target optimization for buttons on mobile */
+  /* Touch target optimization for STANDALONE buttons on mobile.
+     Scoped so it does NOT apply to inline/table action buttons. */
   .btn {
-    padding: 0.75rem 1.5rem !important;
     min-height: 44px;
-    width: 100%; /* Full width buttons are easier to tap on mobile */
+  }
+
+  /* Full-width buttons — only when NOT inside a table, inline flex, or explicitly marked inline */
+  .card > .btn,
+  .form-group + .btn,
+  form > .btn {
+    width: 100%;
+  }
+
+  /* Buttons inside tables and flex containers stay compact */
+  .table .btn,
+  .btn-inline {
+    width: auto !important;
+    padding: 0.5rem 0.75rem !important;
+    font-size: 0.75rem !important;
+    min-height: 36px;
   }
 }
 
@@ -362,11 +377,21 @@ button {
   .hide-mobile {
     display: none !important;
   }
+
+  /* Show-only on mobile */
+  .show-mobile {
+    display: block !important;
+  }
   
   /* Make sure table cells are compact on mobile */
   .table th, .table td {
-    padding: 0.75rem 1rem !important;
+    padding: 0.625rem 0.75rem !important;
     font-size: 0.8125rem !important;
+  }
+
+  /* Compact table for mobile — reduce cell widths */
+  .table th {
+    white-space: nowrap;
   }
 
   /* Responsive Modals (Mobile Bottom Sheets / Drawer Sheets) */
@@ -386,6 +411,27 @@ button {
     padding: 1.5rem 1.5rem 2.5rem 1.5rem !important; /* Extra bottom padding for mobile home indicator */
     max-height: 88vh !important;
     overflow-y: auto !important;
+  }
+
+  /* Responsive form layouts */
+  .form-group {
+    margin-bottom: 1rem;
+  }
+
+  /* Flex wrap on mobile */
+  .flex-wrap-mobile {
+    flex-wrap: wrap !important;
+  }
+
+  /* Badge scaling for small screens */
+  .badge {
+    font-size: 0.625rem;
+    padding: 0.2rem 0.5rem;
+  }
+
+  /* Summary values should scale down */
+  h2 {
+    word-break: break-word;
   }
 }
 

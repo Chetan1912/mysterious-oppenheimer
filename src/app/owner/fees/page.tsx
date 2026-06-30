@@ -170,7 +170,7 @@ export default function FeeManagement() {
   return (
     <div className={styles.container}>
       {/* Header */}
-      <div className={`${styles.header} flex justify-between align-center`}>
+      <div className={`${styles.header} flex justify-between align-center flex-mobile-col`}>
         <div>
           <h2>Fee Ledger Management</h2>
           <p className={styles.subtitle}>Track collections, manage monthly invoices, and send automated reminders.</p>

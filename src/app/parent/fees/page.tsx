@@ -101,10 +101,10 @@ export default function ParentFees() {
                     <thead>
                       <tr>
                         <th>Month</th>
-                        <th>Base Fee</th>
-                        <th>Late Fee</th>
+                        <th className="hide-mobile">Base Fee</th>
+                        <th className="hide-mobile">Late Fee</th>
                         <th>Total Due</th>
-                        <th>Paid</th>
+                        <th className="hide-mobile">Paid</th>
                         <th>Balance</th>
                         <th>Status</th>
                       </tr>
@@ -122,10 +122,10 @@ export default function ParentFees() {
                           return (
                             <tr key={due.id}>
                               <td><strong>{getMonthName(due.month)} {due.year}</strong></td>
-                              <td>₹{Number(due.baseAmount).toLocaleString()}</td>
-                              <td>₹{Number(due.lateFee).toLocaleString()}</td>
+                              <td className="hide-mobile">₹{Number(due.baseAmount).toLocaleString()}</td>
+                              <td className="hide-mobile">₹{Number(due.lateFee).toLocaleString()}</td>
                               <td><strong>₹{Number(due.totalDue).toLocaleString()}</strong></td>
-                              <td style={{ color: "var(--success)" }}>₹{Number(due.paidAmount).toLocaleString()}</td>
+                              <td className="hide-mobile" style={{ color: "var(--success)" }}>₹{Number(due.paidAmount).toLocaleString()}</td>
                               <td style={{ color: balance > 0 ? "var(--danger)" : "var(--neutral-500)", fontWeight: 600 }}>
                                 ₹{balance.toLocaleString()}
                               </td>
@@ -153,7 +153,7 @@ export default function ParentFees() {
                             <th>Date</th>
                             <th>Reference Month</th>
                             <th>Method</th>
-                            <th>Notes</th>
+                            <th className="hide-mobile">Notes</th>
                             <th style={{ textAlign: "right" }}>Amount</th>
                           </tr>
                         </thead>
@@ -164,7 +164,7 @@ export default function ParentFees() {
                                 <td>{new Date(p.paymentDate).toLocaleDateString()}</td>
                                 <td>{getMonthName(due.month)} {due.year}</td>
                                 <td><span className={styles.methodBadge}>{p.paymentMethod}</span></td>
-                                <td style={{ color: "var(--neutral-500)", fontSize: "0.8125rem" }}>
+                                <td className="hide-mobile" style={{ color: "var(--neutral-500)", fontSize: "0.8125rem" }}>
                                   {p.notes || "—"}
                                 </td>
                                 <td className={styles.amountText}>₹{Number(p.amountPaid).toLocaleString()}</td>

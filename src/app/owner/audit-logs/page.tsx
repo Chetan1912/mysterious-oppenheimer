@@ -112,7 +112,7 @@ export default function AuditLogs() {
                   <td>
                     <span className={styles.actionBadge}>{log.action}</span>
                   </td>
-                  <td style={{ fontSize: "0.8125rem", color: "var(--neutral-600)", maxWidth: "350px", wordBreak: "break-all" }}>
+                  <td style={{ fontSize: "0.8125rem", color: "var(--neutral-600)", maxWidth: "40vw", wordBreak: "break-all" }}>
                     {formatDetails(log.details)}
                   </td>
                 </tr>

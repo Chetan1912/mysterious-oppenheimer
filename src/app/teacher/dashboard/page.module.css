@@ -216,3 +216,9 @@
   font-weight: 500;
   color: var(--neutral-700);
 }
+
+@media (max-width: 640px) {
+  .actionGrid {
+    grid-template-columns: 1fr;
+  }
+}

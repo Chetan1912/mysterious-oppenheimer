@@ -269,3 +269,10 @@
   font-size: 0.6875rem;
   color: var(--neutral-400);
 }
+
+@media (max-width: 480px) {
+  .markItem {
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+}

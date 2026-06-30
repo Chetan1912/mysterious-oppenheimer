@@ -372,7 +372,7 @@ export default function MarksEntry() {
                         <input
                           type="number"
                           className="form-control"
-                          style={{ width: "90px", textAlign: "center", fontWeight: "bold" }}
+                          style={{ width: "100%", maxWidth: "90px", minWidth: "60px", textAlign: "center", fontWeight: "bold" }}
                           placeholder="0"
                           value={marksGrid[student.id]?.score || ""}
                           onChange={(e) => handleScoreChange(student.id, e.target.value)}

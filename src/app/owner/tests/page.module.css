@@ -160,3 +160,13 @@
   display: block;
   margin-top: 0.125rem;
 }
+
+@media (max-width: 640px) {
+  .scoreRow {
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+  .scoresList {
+    max-height: 40vh;
+  }
+}

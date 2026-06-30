@@ -85,11 +85,11 @@ export default function ParentReports() {
                 <table className="table">
                   <thead>
                     <tr>
-                      <th>Test Date</th>
+                      <th className="hide-mobile">Test Date</th>
                       <th>Test Name</th>
                       <th>Score obtained</th>
                       <th>Percentage</th>
-                      <th>Teacher Remarks</th>
+                      <th className="hide-mobile">Teacher Remarks</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -105,7 +105,7 @@ export default function ParentReports() {
                         const percent = ((score / m.test.maxMarks) * 100).toFixed(1);
                         return (
                           <tr key={m.id}>
-                            <td>{new Date(m.test.testDate).toLocaleDateString()}</td>
+                            <td className="hide-mobile">{new Date(m.test.testDate).toLocaleDateString()}</td>
                             <td><strong>{m.test.title}</strong></td>
                             <td><strong>{score}</strong> / {m.test.maxMarks}</td>
                             <td>
@@ -118,7 +118,7 @@ export default function ParentReports() {
                                 {percent}%
                               </span>
                             </td>
-                            <td style={{ color: "var(--neutral-600)", fontSize: "0.8125rem" }}>
+                            <td className="hide-mobile" style={{ color: "var(--neutral-600)", fontSize: "0.8125rem" }}>
                               {m.remarks || "No remarks entered."}
                             </td>
                           </tr>

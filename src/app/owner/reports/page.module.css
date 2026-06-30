@@ -129,3 +129,17 @@
     color: #475569;
   }
 }
+
+@media (max-width: 640px) {
+  .tabContainer {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    gap: 0.5rem;
+  }
+  .tabContainer button {
+    white-space: nowrap;
+    flex-shrink: 0;
+    font-size: 0.8125rem;
+    padding: 0.5rem 0.75rem;
+  }
+}

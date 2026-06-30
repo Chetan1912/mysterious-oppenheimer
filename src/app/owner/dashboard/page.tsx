@@ -182,7 +182,7 @@ export default function OwnerDashboard() {
                     <tr>
                       <th>Student</th>
                       <th>Date</th>
-                      <th>Method</th>
+                      <th className="hide-mobile">Method</th>
                       <th>Amount</th>
                     </tr>
                   </thead>
@@ -196,7 +196,7 @@ export default function OwnerDashboard() {
                           </div>
                         </td>
                         <td>{new Date(payment.paymentDate).toLocaleDateString()}</td>
-                        <td><span className={styles.methodBadge}>{payment.paymentMethod}</span></td>
+                        <td className="hide-mobile"><span className={styles.methodBadge}>{payment.paymentMethod}</span></td>
                         <td className={styles.amountText}>₹{Number(payment.amountPaid).toLocaleString()}</td>
                       </tr>
                     ))}
@@ -220,7 +220,7 @@ export default function OwnerDashboard() {
                   <thead>
                     <tr>
                       <th>Student</th>
-                      <th>Period</th>
+                      <th className="hide-mobile">Period</th>
                       <th>Pending Amount</th>
                       <th>Action</th>
                     </tr>
@@ -237,7 +237,7 @@ export default function OwnerDashboard() {
                               <span className={styles.tableSub}>Parent: {account.student.parent.user.name}</span>
                             </div>
                           </td>
-                          <td>{monthName} {account.year}</td>
+                          <td className="hide-mobile">{monthName} {account.year}</td>
                           <td className={styles.pendingText}>₹{pending.toLocaleString()}</td>
                           <td>
                             <button

@@ -87,7 +87,7 @@ export default function OwnerReports() {
   return (
     <div className={styles.container}>
       {/* Header */}
-      <div className={`${styles.header} flex justify-between align-center`}>
+      <div className={`${styles.header} flex justify-between align-center flex-mobile-col`}>
         <div className={styles.headerText}>
           <h2>Institute Analytics & Reports</h2>
           <p className={styles.subtitle}>Review monthly collections, class academic averages, and student balance sheets.</p>
@@ -142,10 +142,10 @@ export default function OwnerReports() {
                 <thead>
                   <tr>
                     <th>Billing Month</th>
-                    <th>Expected Revenue</th>
+                    <th className="hide-mobile">Expected Revenue</th>
                     <th>Actual Collections</th>
                     <th>Outstanding Balance</th>
-                    <th>Collection Rate</th>
+                    <th className="hide-mobile">Collection Rate</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -159,12 +159,12 @@ export default function OwnerReports() {
                       return (
                         <tr key={`${r.month}-${r.year}`}>
                           <td><strong>{getMonthName(r.month)} {r.year}</strong></td>
-                          <td>₹{r.expected.toLocaleString()}</td>
+                          <td className="hide-mobile">₹{r.expected.toLocaleString()}</td>
                           <td style={{ color: "var(--success)" }}>₹{r.collected.toLocaleString()}</td>
                           <td style={{ color: r.pending > 0 ? "var(--danger)" : "var(--neutral-500)", fontWeight: 600 }}>
                             ₹{r.pending.toLocaleString()}
                           </td>
-                          <td>
+                          <td className="hide-mobile">
                             <span
                               style={{
                                 fontWeight: "bold",
@@ -194,9 +194,9 @@ export default function OwnerReports() {
                   <tr>
                     <th>Batch / Class Name</th>
                     <th>Enrolled Students</th>
-                    <th>Tests Conducted</th>
+                    <th className="hide-mobile">Tests Conducted</th>
                     <th>Overall Batch Average</th>
-                    <th>Performance Level</th>
+                    <th className="hide-mobile">Performance Level</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -217,11 +217,11 @@ export default function OwnerReports() {
                         <tr key={b.id}>
                           <td><strong>{b.name}</strong></td>
                           <td>{b.studentCount} students</td>
-                          <td>{b.testCount} tests</td>
+                          <td className="hide-mobile">{b.testCount} tests</td>
                           <td>
                             <strong>{b.averageScore !== null ? `${b.averageScore}%` : "—"}</strong>
                           </td>
-                          <td>
+                          <td className="hide-mobile">
                             {b.averageScore !== null ? (
                               <span
                                 className={styles.performanceLabel}
@@ -256,8 +256,8 @@ export default function OwnerReports() {
                   <tr>
                     <th>Student Details</th>
                     <th>Class</th>
-                    <th>Total Invoiced</th>
-                    <th>Total Paid</th>
+                    <th className="hide-mobile">Total Invoiced</th>
+                    <th className="hide-mobile">Total Paid</th>
                     <th>Outstanding Dues</th>
                   </tr>
                 </thead>
@@ -278,8 +278,8 @@ export default function OwnerReports() {
                           </div>
                         </td>
                         <td>{s.batchName}</td>
-                        <td>₹{s.totalBilled.toLocaleString()}</td>
-                        <td style={{ color: "var(--success)" }}>₹{s.totalPaid.toLocaleString()}</td>
+                        <td className="hide-mobile">₹{s.totalBilled.toLocaleString()}</td>
+                        <td className="hide-mobile" style={{ color: "var(--success)" }}>₹{s.totalPaid.toLocaleString()}</td>
                         <td style={{ color: s.outstanding > 0 ? "var(--danger)" : "var(--neutral-500)", fontWeight: 600 }}>
                           ₹{s.outstanding.toLocaleString()}
                         </td>

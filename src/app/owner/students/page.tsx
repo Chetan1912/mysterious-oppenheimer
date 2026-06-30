@@ -125,7 +125,7 @@ export default function StudentDirectory() {
               <tr>
                 <th>Student</th>
                 <th>Batch</th>
-                <th>Parent Info</th>
+                <th className="hide-mobile">Parent Info</th>
                 <th>Fee Plan</th>
                 <th className="hide-mobile">Joining Date</th>
                 <th style={{ textAlign: "right" }}>Actions</th>
@@ -145,7 +145,7 @@ export default function StudentDirectory() {
                       {student.batch ? student.batch.name : "Unassigned"}
                     </span>
                   </td>
-                  <td>
+                  <td className="hide-mobile">
                     <div>
                       <span className={styles.parentName}>{student.parent.user.name}</span>
                       <span className={styles.parentPhone}>{student.parent.user.phone || "No Phone"}</span>

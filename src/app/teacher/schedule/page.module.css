@@ -102,3 +102,9 @@
   cursor: pointer;
   margin-top: 0.25rem;
 }
+
+@media (max-width: 640px) {
+  .scheduleTimeline {
+    max-height: none;
+  }
+}

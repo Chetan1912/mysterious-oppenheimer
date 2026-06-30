@@ -232,4 +232,9 @@
   .userName {
     display: none;
   }
+
+  .dropdown {
+    width: calc(100vw - 2rem);
+    right: -0.5rem;
+  }
 }

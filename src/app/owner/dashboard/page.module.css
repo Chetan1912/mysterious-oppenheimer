@@ -204,3 +204,9 @@
   font-size: 0.6875rem;
   color: var(--neutral-400);
 }
+
+@media (max-width: 640px) {
+  .actionGrid {
+    grid-template-columns: 1fr;
+  }
+}

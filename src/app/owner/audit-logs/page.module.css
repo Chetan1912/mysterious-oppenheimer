@@ -2,6 +2,9 @@
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
 }
 
 .subtitle {
@@ -58,3 +61,175 @@
   border-radius: var(--radius-sm);
   font-family: monospace;
 }
+
+.tableContainer {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  border: 1px solid var(--neutral-200);
+  border-radius: var(--radius-md);
+  background: white;
+  margin-top: 1rem;
+  display: block;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 900px;
+  table-layout: fixed;
+}
+
+.colTime {
+  width: 15%;
+  min-width: 160px;
+  white-space: nowrap;
+  font-size: 0.8125rem;
+}
+
+.colUser {
+  width: 25%;
+  min-width: 200px;
+}
+
+.colRole {
+  width: 10%;
+  min-width: 100px;
+}
+
+.colAction {
+  width: 20%;
+  min-width: 160px;
+}
+
+.colDetails {
+  width: 30%;
+  min-width: 280px;
+  font-size: 0.8125rem;
+  color: var(--neutral-600);
+  word-break: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+}
+
+@media (max-width: 1200px) {
+  .tableContainer {
+    border: none;
+    background: transparent;
+    margin-top: 1rem;
+    overflow-x: visible;
+  }
+
+  .table, 
+  .table tbody, 
+  .table tr, 
+  .table td {
+    display: block;
+    width: 100%;
+  }
+
+  .table thead {
+    display: none;
+  }
+
+  .table tr {
+    background: white;
+    border: 1px solid var(--neutral-200);
+    border-radius: var(--radius-md);
+    margin-bottom: 1.25rem;
+    padding: 1.25rem;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .table tr:hover td {
+    background-color: transparent;
+  }
+
+  .table td {
+    padding: 0.625rem 0 !important;
+    border-bottom: 1px dashed var(--neutral-100);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: right;
+  }
+
+  .table td:first-child {
+    display: block;
+    text-align: left;
+    border-bottom: 1px solid var(--neutral-200);
+    padding-bottom: 0.75rem !important;
+    margin-bottom: 0.5rem;
+  }
+
+  .table td:last-child {
+    border-bottom: none;
+    padding-top: 0.75rem !important;
+  }
+
+  .table td[data-label]::before {
+    content: attr(data-label);
+    float: left;
+    font-weight: 600;
+    color: var(--neutral-500);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .table td:first-child[data-label]::before {
+    display: none;
+  }
+
+  .table td:last-child[data-label]::before {
+    display: none;
+  }
+
+  /* Style details log as a custom box at the bottom of the card */
+  .table td[data-label="Details"] {
+    display: block;
+    text-align: left;
+    background-color: var(--neutral-50);
+    padding: 0.75rem !important;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--neutral-100);
+    margin-top: 0.5rem;
+    min-width: 0 !important;
+  }
+
+  .table td[data-label="Details"]::before {
+    display: block !important;
+    float: none;
+    margin-bottom: 0.35rem;
+  }
+}
+
+/* Details grid styling */
+.detailsGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.detailItem {
+  display: flex;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  line-height: 1.4;
+  text-align: left;
+}
+
+.detailKey {
+  font-weight: 600;
+  color: var(--neutral-500);
+  flex-shrink: 0;
+  min-width: 75px;
+}
+
+.detailVal {
+  color: var(--neutral-800);
+  word-break: break-all;
+}
+
+
+

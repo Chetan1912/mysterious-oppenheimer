@@ -352,8 +352,8 @@ export default function MarksEntry() {
             <span className={styles.maxMarksBadge}>Maximum Marks: {activeTest?.maxMarks}</span>
           </div>
 
-          <div className="table-container">
-            <table className="table">
+          <div className={`table-container ${styles.tableContainer}`}>
+            <table className={`table ${styles.table}`}>
               <thead>
                 <tr>
                   <th style={{ width: "35%" }}>Student Name</th>
@@ -365,9 +365,9 @@ export default function MarksEntry() {
               <tbody>
                 {students.map((student) => (
                   <tr key={student.id}>
-                    <td><strong>{student.name}</strong></td>
-                    <td className="hide-mobile"><span className={styles.admissionId}>{student.admissionId}</span></td>
-                    <td>
+                    <td data-label="Student Name"><strong>{student.name}</strong></td>
+                    <td data-label="Admission ID" className="hide-mobile"><span className={styles.admissionId}>{student.admissionId}</span></td>
+                    <td data-label="Score obtained">
                       <div className="flex align-center gap-2">
                         <input
                           type="number"
@@ -385,7 +385,7 @@ export default function MarksEntry() {
                         </span>
                       </div>
                     </td>
-                    <td>
+                    <td data-label="Remarks / Feedback">
                       <input
                         type="text"
                         className="form-control"

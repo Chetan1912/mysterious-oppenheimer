@@ -40,15 +40,27 @@ export default function AuditLogs() {
     fetchLogs();
   }, []);
 
-  const formatDetails = (detailStr: string | null) => {
-    if (!detailStr) return "—";
+  const renderDetails = (detailStr: string | null) => {
+    if (!detailStr) return <span>—</span>;
     try {
       const parsed = JSON.parse(detailStr);
-      return Object.entries(parsed)
-        .map(([key, val]) => `${key}: ${typeof val === "object" ? JSON.stringify(val) : val}`)
-        .join(", ");
+      const entries = Object.entries(parsed);
+      if (entries.length === 0) return <span>—</span>;
+      return (
+        <div className={styles.detailsGrid}>
+          {entries.map(([key, val]) => {
+            const displayVal = typeof val === "object" ? JSON.stringify(val) : String(val);
+            return (
+              <div key={key} className={styles.detailItem}>
+                <span className={styles.detailKey}>{key}:</span>
+                <span className={styles.detailVal}>{displayVal}</span>
+              </div>
+            );
+          })}
+        </div>
+      );
     } catch (e) {
-      return detailStr;
+      return <span style={{ wordBreak: "break-all" }}>{detailStr}</span>;
     }
   };
 
@@ -79,24 +91,21 @@ export default function AuditLogs() {
           <p style={{ color: "var(--neutral-500)" }}>No audit logs recorded yet.</p>
         </div>
       ) : (
-        <div className="table-container">
-          <table className="table">
+        <div className={`table-container ${styles.tableContainer}`}>
+          <table className={`table ${styles.table}`}>
             <thead>
               <tr>
-                <th className="hide-mobile">Timestamp</th>
-                <th>User</th>
-                <th className="hide-mobile">Role</th>
-                <th>Action</th>
-                <th>Details</th>
+                <th className={styles.colUser}>User</th>
+                <th className={styles.colRole}>Role</th>
+                <th className={styles.colAction}>Action</th>
+                <th className={styles.colTime}>Timestamp</th>
+                <th className={styles.colDetails}>Details</th>
               </tr>
             </thead>
             <tbody>
               {logs.map((log) => (
                 <tr key={log.id}>
-                  <td className="hide-mobile" style={{ fontSize: "0.8125rem", whiteSpace: "nowrap" }}>
-                    {new Date(log.createdAt).toLocaleString()}
-                  </td>
-                  <td>
+                  <td data-label="User" className={styles.colUser}>
                     <div>
                       <span style={{ fontWeight: 600 }}>{log.user.name}</span>
                       <span style={{ fontSize: "0.75rem", color: "var(--neutral-500)", display: "block" }}>
@@ -104,16 +113,19 @@ export default function AuditLogs() {
                       </span>
                     </div>
                   </td>
-                  <td className="hide-mobile">
+                  <td data-label="Role" className={styles.colRole}>
                     <span className={styles.roleBadge} data-role={log.user.role}>
                       {log.user.role}
                     </span>
                   </td>
-                  <td>
+                  <td data-label="Action" className={styles.colAction}>
                     <span className={styles.actionBadge}>{log.action}</span>
                   </td>
-                  <td style={{ fontSize: "0.8125rem", color: "var(--neutral-600)", maxWidth: "40vw", wordBreak: "break-all" }}>
-                    {formatDetails(log.details)}
+                  <td data-label="Timestamp" className={styles.colTime}>
+                    {new Date(log.createdAt).toLocaleString()}
+                  </td>
+                  <td data-label="Details" className={styles.colDetails}>
+                    {renderDetails(log.details)}
                   </td>
                 </tr>
               ))}

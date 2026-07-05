@@ -328,11 +328,11 @@ export default function StudentProfile({ params }: { params: Promise<{ id: strin
             <table className={`table ${styles.table}`}>
               <thead>
                 <tr>
-                  <th className="hide-mobile">Test Date</th>
                   <th>Test Name</th>
+                  <th>Test Date</th>
                   <th>Score</th>
                   <th>Percentage</th>
-                  <th className="hide-mobile">Teacher Remarks</th>
+                  <th>Remarks</th>
                 </tr>
               </thead>
               <tbody>
@@ -348,8 +348,8 @@ export default function StudentProfile({ params }: { params: Promise<{ id: strin
                     const percent = ((scoreNum / m.test.maxMarks) * 100).toFixed(1);
                     return (
                       <tr key={m.id}>
-                        <td data-label="Test Date" className="hide-mobile">{new Date(m.test.testDate).toLocaleDateString()}</td>
                         <td data-label="Test Name"><strong>{m.test.title}</strong></td>
+                        <td data-label="Test Date">{new Date(m.test.testDate).toLocaleDateString()}</td>
                         <td data-label="Score">
                           <strong>{scoreNum}</strong> / {m.test.maxMarks}
                         </td>
@@ -363,7 +363,7 @@ export default function StudentProfile({ params }: { params: Promise<{ id: strin
                             {percent}%
                           </span>
                         </td>
-                        <td data-label="Remarks" className="hide-mobile" style={{ color: "var(--neutral-600)", fontSize: "0.8125rem" }}>
+                        <td data-label="Remarks" style={{ color: "var(--neutral-600)", fontSize: "0.8125rem" }}>
                           {m.remarks || "No remarks entered."}
                         </td>
                       </tr>

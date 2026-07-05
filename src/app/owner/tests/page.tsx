@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import styles from "./page.module.css";
 
 interface Test {
@@ -42,6 +42,32 @@ export default function OwnerTests() {
   const [tests, setTests] = useState<Test[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  
+  // Search & Filter state
+  const [searchTerm, setSearchTerm] = useState("");
+  const [sortBy, setSortBy] = useState<"newest" | "oldest" | "marks">("newest");
+
+  // Client-side filtering & sorting
+  const filteredAndSortedTests = useMemo(() => {
+    return tests
+      .filter((test) => {
+        const matchesTitle = test.title.toLowerCase().includes(searchTerm.toLowerCase());
+        const matchesBatch = test.batch.name.toLowerCase().includes(searchTerm.toLowerCase());
+        return matchesTitle || matchesBatch;
+      })
+      .sort((a, b) => {
+        if (sortBy === "newest") {
+          return new Date(b.testDate).getTime() - new Date(a.testDate).getTime();
+        }
+        if (sortBy === "oldest") {
+          return new Date(a.testDate).getTime() - new Date(b.testDate).getTime();
+        }
+        if (sortBy === "marks") {
+          return b.maxMarks - a.maxMarks;
+        }
+        return 0;
+      });
+  }, [tests, searchTerm, sortBy]);
 
   // Modal State
   const [testDetail, setTestDetail] = useState<TestDetail | null>(null);
@@ -109,10 +135,46 @@ export default function OwnerTests() {
         <p className={styles.subtitle}>Review academic performances, class averages, and test marks recorded by teachers.</p>
       </div>
 
+      {/* Controls: Search & Sort */}
+      {tests.length > 0 && (
+        <div className={styles.controlsRow}>
+          <div className={styles.searchContainer}>
+            <svg className={styles.searchIcon} width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="11" cy="11" r="8" />
+              <line x1="21" y1="21" x2="16.65" y2="16.65" />
+            </svg>
+            <input
+              type="text"
+              className={styles.searchInput}
+              placeholder="Search tests or batches..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+          </div>
+
+          <div className={styles.sortContainer}>
+            <span className={styles.sortLabel}>Sort by:</span>
+            <select
+              className={styles.sortSelect}
+              value={sortBy}
+              onChange={(e) => setSortBy(e.target.value as any)}
+            >
+              <option value="newest">Newest Test</option>
+              <option value="oldest">Oldest Test</option>
+              <option value="marks">Highest Marks</option>
+            </select>
+          </div>
+        </div>
+      )}
+
       {/* Tests Table */}
       {tests.length === 0 ? (
         <div className="card" style={{ textAlign: "center", padding: "3rem" }}>
           <p style={{ color: "var(--neutral-500)" }}>No tests have been created yet.</p>
+        </div>
+      ) : filteredAndSortedTests.length === 0 ? (
+        <div className="card" style={{ textAlign: "center", padding: "3rem" }}>
+          <p style={{ color: "var(--neutral-500)" }}>No tests found matching &quot;{searchTerm}&quot;.</p>
         </div>
       ) : (
         <div className={`table-container ${styles.tableContainer}`}>
@@ -128,9 +190,14 @@ export default function OwnerTests() {
               </tr>
             </thead>
             <tbody>
-              {tests.map((test) => (
+              {filteredAndSortedTests.map((test) => (
                 <tr key={test.id}>
-                  <td data-label="Test Name"><strong>{test.title}</strong></td>
+                  <td data-label="Test Name">
+                    <strong>{test.title}</strong>
+                    <span className={styles.testDateSub}>
+                      {" "}• {new Date(test.testDate).toLocaleDateString()}
+                    </span>
+                  </td>
                   <td data-label="Batch / Class">
                     <span className={styles.batchBadge}>{test.batch.name}</span>
                   </td>

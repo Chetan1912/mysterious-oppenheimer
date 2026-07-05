@@ -137,15 +137,15 @@ export default function OwnerReports() {
         {activeTab === "revenue" && (
           <div className="card fade-in">
             <h3 className={styles.tableTitle}>Monthly Collection & Dues Report</h3>
-            <div className="table-container">
-              <table className="table">
+            <div className={`table-container ${styles.tableContainer}`}>
+              <table className={`table ${styles.table}`}>
                 <thead>
                   <tr>
                     <th>Billing Month</th>
-                    <th className="hide-mobile">Expected Revenue</th>
+                    <th>Expected Revenue</th>
                     <th>Actual Collections</th>
                     <th>Outstanding Balance</th>
-                    <th className="hide-mobile">Collection Rate</th>
+                    <th>Collection Rate</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -158,13 +158,13 @@ export default function OwnerReports() {
                       const rate = r.expected > 0 ? ((r.collected / r.expected) * 100).toFixed(1) : "0.0";
                       return (
                         <tr key={`${r.month}-${r.year}`}>
-                          <td><strong>{getMonthName(r.month)} {r.year}</strong></td>
-                          <td className="hide-mobile">₹{r.expected.toLocaleString()}</td>
-                          <td style={{ color: "var(--success)" }}>₹{r.collected.toLocaleString()}</td>
-                          <td style={{ color: r.pending > 0 ? "var(--danger)" : "var(--neutral-500)", fontWeight: 600 }}>
+                          <td data-label="Billing Month"><strong>{getMonthName(r.month)} {r.year}</strong></td>
+                          <td data-label="Expected Revenue">₹{r.expected.toLocaleString()}</td>
+                          <td data-label="Actual Collections" style={{ color: "var(--success)" }}>₹{r.collected.toLocaleString()}</td>
+                          <td data-label="Outstanding Balance" style={{ color: r.pending > 0 ? "var(--danger)" : "var(--neutral-500)", fontWeight: 600 }}>
                             ₹{r.pending.toLocaleString()}
                           </td>
-                          <td className="hide-mobile">
+                          <td data-label="Collection Rate">
                             <span
                               style={{
                                 fontWeight: "bold",
@@ -188,15 +188,15 @@ export default function OwnerReports() {
         {activeTab === "academics" && (
           <div className="card fade-in">
             <h3 className={styles.tableTitle}>Batch-wise Academic Performance Report</h3>
-            <div className="table-container">
-              <table className="table">
+            <div className={`table-container ${styles.tableContainer}`}>
+              <table className={`table ${styles.table}`}>
                 <thead>
                   <tr>
                     <th>Batch / Class Name</th>
                     <th>Enrolled Students</th>
-                    <th className="hide-mobile">Tests Conducted</th>
+                    <th>Tests Conducted</th>
                     <th>Overall Batch Average</th>
-                    <th className="hide-mobile">Performance Level</th>
+                    <th>Performance Level</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -215,13 +215,13 @@ export default function OwnerReports() {
                         : "No Data";
                       return (
                         <tr key={b.id}>
-                          <td><strong>{b.name}</strong></td>
-                          <td>{b.studentCount} students</td>
-                          <td className="hide-mobile">{b.testCount} tests</td>
-                          <td>
+                          <td data-label="Batch / Class Name"><strong>{b.name}</strong></td>
+                          <td data-label="Enrolled Students">{b.studentCount} students</td>
+                          <td data-label="Tests Conducted">{b.testCount} tests</td>
+                          <td data-label="Overall Batch Average">
                             <strong>{b.averageScore !== null ? `${b.averageScore}%` : "—"}</strong>
                           </td>
-                          <td className="hide-mobile">
+                          <td data-label="Performance Level">
                             {b.averageScore !== null ? (
                               <span
                                 className={styles.performanceLabel}
@@ -250,14 +250,14 @@ export default function OwnerReports() {
         {activeTab === "students" && (
           <div className="card fade-in">
             <h3 className={styles.tableTitle}>Student Financial Ledger Summary</h3>
-            <div className="table-container">
-              <table className="table">
+            <div className={`table-container ${styles.tableContainer}`}>
+              <table className={`table ${styles.table}`}>
                 <thead>
                   <tr>
                     <th>Student Details</th>
                     <th>Class</th>
-                    <th className="hide-mobile">Total Invoiced</th>
-                    <th className="hide-mobile">Total Paid</th>
+                    <th>Total Invoiced</th>
+                    <th>Total Paid</th>
                     <th>Outstanding Dues</th>
                   </tr>
                 </thead>
@@ -269,7 +269,7 @@ export default function OwnerReports() {
                   ) : (
                     studentReports.map((s) => (
                       <tr key={s.id}>
-                        <td>
+                        <td data-label="Student Details">
                           <div>
                             <span style={{ fontWeight: 600 }}>{s.name}</span>
                             <span style={{ fontSize: "0.75rem", color: "var(--neutral-500)", display: "block" }}>
@@ -277,10 +277,10 @@ export default function OwnerReports() {
                             </span>
                           </div>
                         </td>
-                        <td>{s.batchName}</td>
-                        <td className="hide-mobile">₹{s.totalBilled.toLocaleString()}</td>
-                        <td className="hide-mobile" style={{ color: "var(--success)" }}>₹{s.totalPaid.toLocaleString()}</td>
-                        <td style={{ color: s.outstanding > 0 ? "var(--danger)" : "var(--neutral-500)", fontWeight: 600 }}>
+                        <td data-label="Class">{s.batchName}</td>
+                        <td data-label="Total Invoiced">₹{s.totalBilled.toLocaleString()}</td>
+                        <td data-label="Total Paid" style={{ color: "var(--success)" }}>₹{s.totalPaid.toLocaleString()}</td>
+                        <td data-label="Outstanding Dues" style={{ color: s.outstanding > 0 ? "var(--danger)" : "var(--neutral-500)", fontWeight: 600 }}>
                           ₹{s.outstanding.toLocaleString()}
                         </td>
                       </tr>

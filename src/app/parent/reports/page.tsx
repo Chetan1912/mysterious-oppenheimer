@@ -81,15 +81,15 @@ export default function ParentReports() {
                 <span className={styles.admissionId}>{child.admissionId}</span>
               </div>
 
-              <div className="table-container">
-                <table className="table">
+              <div className={`table-container ${styles.tableContainer}`}>
+                <table className={`table ${styles.table}`}>
                   <thead>
                     <tr>
-                      <th className="hide-mobile">Test Date</th>
                       <th>Test Name</th>
+                      <th>Test Date</th>
                       <th>Score obtained</th>
                       <th>Percentage</th>
-                      <th className="hide-mobile">Teacher Remarks</th>
+                      <th>Teacher Remarks</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -105,10 +105,10 @@ export default function ParentReports() {
                         const percent = ((score / m.test.maxMarks) * 100).toFixed(1);
                         return (
                           <tr key={m.id}>
-                            <td className="hide-mobile">{new Date(m.test.testDate).toLocaleDateString()}</td>
-                            <td><strong>{m.test.title}</strong></td>
-                            <td><strong>{score}</strong> / {m.test.maxMarks}</td>
-                            <td>
+                            <td data-label="Test Name"><strong>{m.test.title}</strong></td>
+                            <td data-label="Test Date">{new Date(m.test.testDate).toLocaleDateString()}</td>
+                            <td data-label="Score obtained"><strong>{score}</strong> / {m.test.maxMarks}</td>
+                            <td data-label="Percentage">
                               <span
                                 className={styles.percentText}
                                 style={{
@@ -118,7 +118,7 @@ export default function ParentReports() {
                                 {percent}%
                               </span>
                             </td>
-                            <td className="hide-mobile" style={{ color: "var(--neutral-600)", fontSize: "0.8125rem" }}>
+                            <td data-label="Teacher Remarks" style={{ color: "var(--neutral-600)", fontSize: "0.8125rem" }}>
                               {m.remarks || "No remarks entered."}
                             </td>
                           </tr>

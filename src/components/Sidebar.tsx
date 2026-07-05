@@ -37,6 +37,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
       { name: "Dashboard", href: "/teacher/dashboard", icon: <DashboardIcon /> },
       { name: "Schedule Planner", href: "/teacher/schedule", icon: <ScheduleIcon /> },
       { name: "Marks Entry", href: "/teacher/marks", icon: <AcademicIcon /> },
+      { name: "Complaints", href: "/teacher/complaints", icon: <NoticeIcon /> },
     ],
     PARENT: [
       { name: "Dashboard", href: "/parent/dashboard", icon: <DashboardIcon /> },

@@ -1,0 +1,172 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+}
+
+.subtitle {
+  font-size: 0.875rem;
+  color: var(--neutral-500);
+  margin-top: 0.25rem;
+}
+
+.splitGrid {
+  display: grid;
+  grid-template-columns: 1.2fr 1.8fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.listContainer {
+  max-height: 75vh;
+  overflow-y: auto;
+  padding-right: 0.25rem;
+}
+
+.listGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.listItem {
+  display: flex;
+  flex-direction: column;
+  padding: 1.25rem;
+  background-color: var(--neutral-50);
+  border: 1px solid var(--neutral-200);
+  border-radius: var(--radius-md);
+  transition: var(--transition-all);
+}
+
+.listItem:hover {
+  border-color: var(--primary-light);
+  background-color: white;
+  box-shadow: var(--shadow-sm);
+}
+
+.itemHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px dashed var(--neutral-200);
+  padding-bottom: 0.75rem;
+  gap: 1rem;
+}
+
+.studentName {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--neutral-900);
+}
+
+.batchBadge {
+  margin-left: 0.5rem;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.125rem 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  background-color: var(--primary-light);
+  color: var(--primary);
+  border-radius: var(--radius-full);
+}
+
+.timestamp {
+  font-size: 0.75rem;
+  color: var(--neutral-400);
+}
+
+.complaintBody {
+  padding: 0.875rem 0;
+  border-bottom: 1px dashed var(--neutral-200);
+}
+
+.complaintTitle {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--neutral-800);
+  margin-bottom: 0.35rem;
+}
+
+.complaintDesc {
+  font-size: 0.875rem;
+  color: var(--neutral-600);
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+.itemFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 0.75rem;
+  gap: 1rem;
+}
+
+.parentMeta {
+  font-size: 0.8125rem;
+  color: var(--neutral-600);
+}
+
+.statusBadge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.125rem 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  background-color: var(--success-bg);
+  color: var(--success);
+  border-radius: var(--radius-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 50vh;
+  gap: 1rem;
+  color: var(--neutral-500);
+}
+
+/* Responsiveness */
+@media (max-width: 1024px) {
+  .splitGrid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .itemHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .timestamp {
+    align-self: flex-end;
+  }
+
+  .itemFooter {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .statusBadge {
+    align-self: flex-end;
+  }
+}

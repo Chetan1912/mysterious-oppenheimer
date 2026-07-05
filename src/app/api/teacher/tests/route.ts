@@ -50,6 +50,36 @@ export async function POST(request: NextRequest) {
       },
     });
 
+    // Notify parents of all students in this batch
+    const students = await db.student.findMany({
+      where: { batchId },
+      select: {
+        parent: {
+          select: {
+            userId: true,
+          },
+        },
+      },
+    });
+
+    const parentUserIds = new Set<string>();
+    students.forEach((s) => {
+      if (s.parent?.userId) {
+        parentUserIds.add(s.parent.userId);
+      }
+    });
+
+    const notifications = Array.from(parentUserIds).map((pUserId) =>
+      db.notification.create({
+        data: {
+          userId: pUserId,
+          title: `New Test Scheduled`,
+          message: `A new test "${test.title}" has been scheduled for your child's batch on ${new Date(testDate).toLocaleString()}. (Max Marks: ${maxMarksNum})`,
+        },
+      })
+    );
+    await Promise.all(notifications);
+
     return NextResponse.json({ success: true, test });
   } catch (error) {
     console.error("Create test error:", error);

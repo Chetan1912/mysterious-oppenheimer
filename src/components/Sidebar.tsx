@@ -64,6 +64,10 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
           <div className={styles.userMeta}>
             <span className={styles.userName}>{user.name}</span>
             <span className={styles.userRole}>{role.toLowerCase()}</span>
+            <button onClick={logout} className={styles.logoutBtnInline}>
+              <span className={styles.logoutIcon}><LogoutIcon /></span>
+              <span>Sign Out</span>
+            </button>
           </div>
         </div>
 
@@ -84,12 +88,6 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
           })}
         </nav>
 
-        <div className={styles.footer}>
-          <button onClick={logout} className={styles.logoutBtn}>
-            <span className={styles.icon}><LogoutIcon /></span>
-            <span>Sign Out</span>
-          </button>
-        </div>
       </aside>
     </>
   );

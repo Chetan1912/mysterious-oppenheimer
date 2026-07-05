@@ -28,6 +28,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
       { name: "Fee Management", href: "/owner/fees", icon: <DollarIcon /> },
       { name: "Tests & Exams", href: "/owner/tests", icon: <AcademicIcon /> },
       { name: "Notice Board", href: "/owner/notices", icon: <NoticeIcon /> },
+      { name: "Batches & Plans", href: "/owner/batches-plans", icon: <LayersIcon /> },
       { name: "Reports", href: "/owner/reports", icon: <ReportIcon /> },
       { name: "Audit Logs", href: "/owner/audit-logs", icon: <SettingsIcon /> },
     ],
@@ -192,6 +193,16 @@ function LogoutIcon() {
       <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
       <polyline points="16 17 21 12 16 7" />
       <line x1="21" y1="12" x2="9" y2="12" />
+    </svg>
+  );
+}
+
+function LayersIcon() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <polygon points="12 2 2 7 12 12 22 7 12 2" />
+      <polyline points="2 17 12 22 22 17" />
+      <polyline points="2 12 12 17 22 12" />
     </svg>
   );
 }

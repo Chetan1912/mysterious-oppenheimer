@@ -273,8 +273,8 @@ export default function FeeManagement() {
           <p style={{ color: "var(--neutral-500)" }}>No due records found matching the criteria.</p>
         </div>
       ) : (
-        <div className="table-container">
-          <table className="table">
+        <div className={`table-container ${styles.tableContainer}`}>
+          <table className={`table ${styles.table}`}>
             <thead>
               <tr>
                 <th>Student</th>
@@ -292,29 +292,29 @@ export default function FeeManagement() {
                 const balance = Number(due.totalDue) - Number(due.paidAmount);
                 return (
                   <tr key={due.id}>
-                    <td>
+                    <td data-label="Student">
                       <div>
                         <span className={styles.studentName}>{due.student.name}</span>
                         <span className={styles.studentId}>{due.student.admissionId}</span>
                       </div>
                     </td>
-                    <td><strong>{getMonthName(due.month)} {due.year}</strong></td>
-                    <td>₹{Number(due.totalDue).toLocaleString()}</td>
-                    <td className="hide-mobile" style={{ color: "var(--success)" }}>₹{Number(due.paidAmount).toLocaleString()}</td>
-                    <td style={{ color: balance > 0 ? "var(--danger)" : "var(--neutral-500)", fontWeight: 600 }}>
+                    <td data-label="Period"><strong>{getMonthName(due.month)} {due.year}</strong></td>
+                    <td data-label="Total Due">₹{Number(due.totalDue).toLocaleString()}</td>
+                    <td data-label="Paid" className="hide-mobile" style={{ color: "var(--success)" }}>₹{Number(due.paidAmount).toLocaleString()}</td>
+                    <td data-label="Balance" style={{ color: balance > 0 ? "var(--danger)" : "var(--neutral-500)", fontWeight: 600 }}>
                       ₹{balance.toLocaleString()}
                     </td>
-                    <td className="hide-mobile">
+                    <td data-label="Reminders" className="hide-mobile">
                       <span className={styles.reminderCount}>
                         {due.reminderCount} sent
                       </span>
                     </td>
-                    <td>
+                    <td data-label="Status">
                       <span className={`badge badge-${due.status.toLowerCase()}`}>
                         {due.status}
                       </span>
                     </td>
-                    <td style={{ textAlign: "right" }}>
+                    <td data-label="Actions" style={{ textAlign: "right" }}>
                       <div className="flex gap-2 justify-end">
                         {due.status !== "PAID" && (
                           <>

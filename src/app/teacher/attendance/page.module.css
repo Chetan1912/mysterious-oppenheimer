@@ -198,6 +198,27 @@
   min-width: 0;
   max-width: 100%;
   display: block;
+  scrollbar-width: thin;
+  scrollbar-color: var(--neutral-300) var(--neutral-100);
+}
+
+.matrixWrapper::-webkit-scrollbar {
+  height: 8px;
+}
+
+.matrixWrapper::-webkit-scrollbar-track {
+  background: var(--neutral-100);
+  border-radius: var(--radius-full);
+}
+
+.matrixWrapper::-webkit-scrollbar-thumb {
+  background: var(--neutral-300);
+  border-radius: var(--radius-full);
+  border: 1.5px solid var(--neutral-100);
+}
+
+.matrixWrapper::-webkit-scrollbar-thumb:hover {
+  background: var(--neutral-400);
 }
 
 .matrixTable {

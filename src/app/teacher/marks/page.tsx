@@ -50,6 +50,7 @@ export default function MarksEntry() {
   const [newTestTitle, setNewTestTitle] = useState("");
   const [newTestMaxMarks, setNewTestMaxMarks] = useState("50");
   const [newTestDate, setNewTestDate] = useState(new Date().toISOString().split("T")[0]);
+  const [newTestTime, setNewTestTime] = useState("10:00");
   const [testCreating, setTestCreating] = useState(false);
 
   useEffect(() => {
@@ -227,7 +228,7 @@ export default function MarksEntry() {
           batchId: selectedBatchId,
           title: newTestTitle,
           maxMarks: newTestMaxMarks,
-          testDate: newTestDate,
+          testDate: `${newTestDate}T${newTestTime}`,
         }),
       });
 
@@ -437,7 +438,7 @@ export default function MarksEntry() {
                 />
               </div>
 
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-3 gap-4">
                 <div className="form-group">
                   <label className="form-label">Max Marks *</label>
                   <input
@@ -458,6 +459,18 @@ export default function MarksEntry() {
                     type="date"
                     value={newTestDate}
                     onChange={(e) => setNewTestDate(e.target.value)}
+                    required
+                    disabled={testCreating}
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label className="form-label">Test Time *</label>
+                  <input
+                    className="form-control"
+                    type="time"
+                    value={newTestTime}
+                    onChange={(e) => setNewTestTime(e.target.value)}
                     required
                     disabled={testCreating}
                   />

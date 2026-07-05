@@ -23,7 +23,8 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
   const links = {
     OWNER: [
       { name: "Dashboard", href: "/owner/dashboard", icon: <DashboardIcon /> },
-      { name: "Admissions", href: "/owner/students/admission", icon: <AddUserIcon /> },
+      { name: "Student Admission", href: "/owner/students/admission", icon: <AddUserIcon /> },
+      { name: "Teacher Admission", href: "/owner/teachers/admission", icon: <AddUserIcon /> },
       { name: "Students & Ledger", href: "/owner/students", icon: <UsersIcon /> },
       { name: "Fee Management", href: "/owner/fees", icon: <DollarIcon /> },
       { name: "Tests & Exams", href: "/owner/tests", icon: <AcademicIcon /> },

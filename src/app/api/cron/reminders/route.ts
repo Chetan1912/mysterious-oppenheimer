@@ -152,7 +152,7 @@ async function handleCron(request: NextRequest) {
             timestamp: now.toISOString(),
           }),
         },
-      }).catch(err => console.error("Error writing cron audit log:", err));
+      }).catch((err: any) => console.error("Error writing cron audit log:", err));
     }
 
     return NextResponse.json({

@@ -45,7 +45,7 @@ export async function GET() {
       },
     });
     const totalOutstanding = overdueResult.reduce(
-      (acc, curr) => acc + (Number(curr.totalDue) - Number(curr.paidAmount)),
+      (acc: number, curr: any) => acc + (Number(curr.totalDue) - Number(curr.paidAmount)),
       0
     );
 

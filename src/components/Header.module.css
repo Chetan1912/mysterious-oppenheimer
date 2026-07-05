@@ -233,8 +233,15 @@
     display: none;
   }
 
+  .notifWrapper {
+    position: static;
+  }
+
   .dropdown {
-    width: calc(100vw - 2rem);
-    right: -0.5rem;
+    top: 65px;
+    left: 1rem;
+    right: 1rem;
+    width: auto;
+    max-height: 380px;
   }
 }

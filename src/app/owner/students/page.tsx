@@ -119,8 +119,8 @@ export default function StudentDirectory() {
           <p style={{ color: "var(--neutral-500)" }}>No students found matching the criteria.</p>
         </div>
       ) : (
-        <div className="table-container">
-          <table className="table">
+        <div className={`table-container ${styles.tableContainer}`}>
+          <table className={`table ${styles.table}`}>
             <thead>
               <tr>
                 <th>Student</th>
@@ -134,24 +134,24 @@ export default function StudentDirectory() {
             <tbody>
               {students.map((student) => (
                 <tr key={student.id}>
-                  <td>
+                  <td data-label="Student">
                     <div>
                       <span className={styles.studentName}>{student.name}</span>
                       <span className={styles.admissionId}>{student.admissionId}</span>
                     </div>
                   </td>
-                  <td>
+                  <td data-label="Batch">
                     <span className={styles.batchBadge}>
                       {student.batch ? student.batch.name : "Unassigned"}
                     </span>
                   </td>
-                  <td className="hide-mobile">
+                  <td data-label="Parent Info" className="hide-mobile">
                     <div>
                       <span className={styles.parentName}>{student.parent.user.name}</span>
                       <span className={styles.parentPhone}>{student.parent.user.phone || "No Phone"}</span>
                     </div>
                   </td>
-                  <td>
+                  <td data-label="Fee Plan">
                     {student.feePlan ? (
                       <div>
                         <span className={styles.planName}>{student.feePlan.name}</span>
@@ -161,8 +161,8 @@ export default function StudentDirectory() {
                       <span style={{ color: "var(--neutral-400)" }}>None</span>
                     )}
                   </td>
-                  <td className="hide-mobile">{new Date(student.joiningDate).toLocaleDateString()}</td>
-                  <td style={{ textAlign: "right" }}>
+                  <td data-label="Joining Date" className="hide-mobile">{new Date(student.joiningDate).toLocaleDateString()}</td>
+                  <td data-label="Actions" style={{ textAlign: "right" }}>
                     <Link
                       href={`/owner/students/${student.id}`}
                       className="btn btn-secondary"

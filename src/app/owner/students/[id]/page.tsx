@@ -216,8 +216,8 @@ export default function StudentProfile({ params }: { params: Promise<{ id: strin
           {/* Due Records Timeline */}
           <div className="card">
             <h3>Monthly Due Timeline</h3>
-            <div className="table-container">
-              <table className="table">
+            <div className={`table-container ${styles.tableContainer}`}>
+              <table className={`table ${styles.table}`}>
                 <thead>
                   <tr>
                     <th>Billing Month</th>
@@ -242,20 +242,20 @@ export default function StudentProfile({ params }: { params: Promise<{ id: strin
                       const balance = Number(due.totalDue) - Number(due.paidAmount);
                       return (
                         <tr key={due.id}>
-                          <td><strong>{getMonthName(due.month)} {due.year}</strong></td>
-                          <td className="hide-mobile">₹{Number(due.baseAmount).toLocaleString()}</td>
-                          <td className="hide-mobile">₹{Number(due.lateFee).toLocaleString()}</td>
-                          <td><strong>₹{Number(due.totalDue).toLocaleString()}</strong></td>
-                          <td className="hide-mobile" style={{ color: "var(--success)" }}>₹{Number(due.paidAmount).toLocaleString()}</td>
-                          <td style={{ color: balance > 0 ? "var(--danger)" : "var(--neutral-500)", fontWeight: 600 }}>
+                          <td data-label="Month"><strong>{getMonthName(due.month)} {due.year}</strong></td>
+                          <td data-label="Base Fee" className="hide-mobile">₹{Number(due.baseAmount).toLocaleString()}</td>
+                          <td data-label="Late Fee" className="hide-mobile">₹{Number(due.lateFee).toLocaleString()}</td>
+                          <td data-label="Total Due"><strong>₹{Number(due.totalDue).toLocaleString()}</strong></td>
+                          <td data-label="Paid" className="hide-mobile" style={{ color: "var(--success)" }}>₹{Number(due.paidAmount).toLocaleString()}</td>
+                          <td data-label="Balance" style={{ color: balance > 0 ? "var(--danger)" : "var(--neutral-500)", fontWeight: 600 }}>
                             ₹{balance.toLocaleString()}
                           </td>
-                          <td>
+                          <td data-label="Status">
                             <span className={`badge badge-${due.status.toLowerCase()}`}>
                               {due.status}
                             </span>
                           </td>
-                          <td style={{ textAlign: "right" }}>
+                          <td data-label="Action" style={{ textAlign: "right" }}>
                             {due.status !== "PAID" && (
                               <button
                                 className="btn btn-primary"
@@ -278,8 +278,8 @@ export default function StudentProfile({ params }: { params: Promise<{ id: strin
           {/* Payment History */}
           <div className="card">
             <h3>Recent Payment Transactions</h3>
-            <div className="table-container">
-              <table className="table">
+            <div className={`table-container ${styles.tableContainer}`}>
+              <table className={`table ${styles.table}`}>
                 <thead>
                   <tr>
                     <th>Date</th>
@@ -303,13 +303,13 @@ export default function StudentProfile({ params }: { params: Promise<{ id: strin
                       const refMonthStr = refDue ? `${getMonthName(refDue.month)} ${refDue.year}` : "N/A";
                       return (
                         <tr key={p.id}>
-                          <td>{new Date(p.paymentDate).toLocaleDateString()}</td>
-                          <td>{refMonthStr}</td>
-                          <td className="hide-mobile"><span className={styles.methodBadge}>{p.paymentMethod}</span></td>
-                          <td className="hide-mobile" style={{ color: "var(--neutral-500)", fontSize: "0.8125rem" }}>
+                          <td data-label="Date">{new Date(p.paymentDate).toLocaleDateString()}</td>
+                          <td data-label="Reference Month">{refMonthStr}</td>
+                          <td data-label="Method" className="hide-mobile"><span className={styles.methodBadge}>{p.paymentMethod}</span></td>
+                          <td data-label="Notes" className="hide-mobile" style={{ color: "var(--neutral-500)", fontSize: "0.8125rem" }}>
                             {p.notes || "—"}
                           </td>
-                          <td className={styles.amountText}>₹{Number(p.amountPaid).toLocaleString()}</td>
+                          <td data-label="Amount" className={styles.amountText}>₹{Number(p.amountPaid).toLocaleString()}</td>
                         </tr>
                       );
                     })
@@ -324,8 +324,8 @@ export default function StudentProfile({ params }: { params: Promise<{ id: strin
       {activeTab === "academics" && (
         <div className="fade-in card">
           <h3>Test Marks & Academic Records</h3>
-          <div className="table-container">
-            <table className="table">
+          <div className={`table-container ${styles.tableContainer}`}>
+            <table className={`table ${styles.table}`}>
               <thead>
                 <tr>
                   <th className="hide-mobile">Test Date</th>
@@ -348,12 +348,12 @@ export default function StudentProfile({ params }: { params: Promise<{ id: strin
                     const percent = ((scoreNum / m.test.maxMarks) * 100).toFixed(1);
                     return (
                       <tr key={m.id}>
-                        <td className="hide-mobile">{new Date(m.test.testDate).toLocaleDateString()}</td>
-                        <td><strong>{m.test.title}</strong></td>
-                        <td>
+                        <td data-label="Test Date" className="hide-mobile">{new Date(m.test.testDate).toLocaleDateString()}</td>
+                        <td data-label="Test Name"><strong>{m.test.title}</strong></td>
+                        <td data-label="Score">
                           <strong>{scoreNum}</strong> / {m.test.maxMarks}
                         </td>
-                        <td>
+                        <td data-label="Percentage">
                           <span
                             className={styles.percentText}
                             style={{
@@ -363,7 +363,7 @@ export default function StudentProfile({ params }: { params: Promise<{ id: strin
                             {percent}%
                           </span>
                         </td>
-                        <td className="hide-mobile" style={{ color: "var(--neutral-600)", fontSize: "0.8125rem" }}>
+                        <td data-label="Remarks" className="hide-mobile" style={{ color: "var(--neutral-600)", fontSize: "0.8125rem" }}>
                           {m.remarks || "No remarks entered."}
                         </td>
                       </tr>

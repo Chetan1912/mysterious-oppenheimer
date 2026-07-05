@@ -138,6 +138,16 @@
   margin-top: 0.125rem;
 }
 
+.studentInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.scoreCol {
+  text-align: right;
+  flex-shrink: 0;
+}
+
 .remarksText {
   font-size: 0.75rem;
   color: var(--neutral-500);
@@ -147,6 +157,9 @@
   padding: 0.25rem 0.5rem;
   border-radius: 4px;
   border: 1px solid var(--neutral-100);
+  word-break: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
 }
 
 .scoreText {
@@ -241,9 +254,22 @@
 }
 
 @media (max-width: 640px) {
+  .modalCard {
+    padding: 1.25rem;
+  }
   .scoreRow {
     flex-direction: column;
-    gap: 0.25rem;
+    align-items: stretch;
+    gap: 0.5rem;
+  }
+  .scoreCol {
+    text-align: left;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px dashed var(--neutral-200);
+    padding-top: 0.5rem;
+    margin-top: 0.25rem;
   }
   .scoresList {
     max-height: 40vh;

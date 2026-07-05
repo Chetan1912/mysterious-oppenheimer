@@ -204,12 +204,12 @@ export default function OwnerTests() {
                       const percent = ((score / testDetail.test.maxMarks) * 100).toFixed(0);
                       return (
                         <div key={m.id} className={styles.scoreRow}>
-                          <div>
+                          <div className={styles.studentInfo}>
                             <span className={styles.studentName}>{m.student.name}</span>
                             <span className={styles.studentId}>{m.student.admissionId}</span>
                             {m.remarks && <p className={styles.remarksText}>Remark: {m.remarks}</p>}
                           </div>
-                          <div style={{ textAlign: "right" }}>
+                          <div className={styles.scoreCol}>
                             <span className={styles.scoreText}>{score} / {testDetail.test.maxMarks}</span>
                             <span
                               className={styles.percentText}

@@ -204,7 +204,7 @@
   width: 100%;
   border-collapse: collapse;
   table-layout: fixed;
-  min-width: 900px;
+  min-width: 1600px;
 }
 
 .matrixTable th,
@@ -238,8 +238,8 @@ th.matrixNameCol {
 }
 
 .matrixDayCol {
-  width: 40px;
-  min-width: 40px;
+  width: 45px;
+  min-width: 45px;
 }
 
 .matrixDot {
@@ -291,20 +291,34 @@ th.matrixNameCol {
 
 @media (max-width: 768px) {
   .rosterHeader {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .rosterHeader div:last-child {
     display: none;
   }
 
   .rosterRow {
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+    padding: 1.25rem;
+    border-bottom: 1px solid var(--neutral-200);
+  }
+
+  .rosterStudentInfo {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .statusButtonsGroup {
+    display: flex;
+    justify-content: flex-start;
+    gap: 0.75rem;
+    margin: 0.25rem 0;
   }
 
   .rosterRow div:last-child {
-    grid-column: 1 / -1;
+    width: 100%;
   }
 
   .sheetHeader {

@@ -115,8 +115,8 @@ export default function OwnerTests() {
           <p style={{ color: "var(--neutral-500)" }}>No tests have been created yet.</p>
         </div>
       ) : (
-        <div className="table-container">
-          <table className="table">
+        <div className={`table-container ${styles.tableContainer}`}>
+          <table className={`table ${styles.table}`}>
             <thead>
               <tr>
                 <th>Test Name</th>
@@ -130,14 +130,14 @@ export default function OwnerTests() {
             <tbody>
               {tests.map((test) => (
                 <tr key={test.id}>
-                  <td><strong>{test.title}</strong></td>
-                  <td>
+                  <td data-label="Test Name"><strong>{test.title}</strong></td>
+                  <td data-label="Batch / Class">
                     <span className={styles.batchBadge}>{test.batch.name}</span>
                   </td>
-                  <td className="hide-mobile">{new Date(test.testDate).toLocaleDateString()}</td>
-                  <td>{test.maxMarks} marks</td>
-                  <td className="hide-mobile">{test._count.marks} graded</td>
-                  <td style={{ textAlign: "right" }}>
+                  <td data-label="Test Date" className="hide-mobile">{new Date(test.testDate).toLocaleDateString()}</td>
+                  <td data-label="Max Marks">{test.maxMarks} marks</td>
+                  <td data-label="Graded Students" className="hide-mobile">{test._count.marks} graded</td>
+                  <td data-label="Actions" style={{ textAlign: "right" }}>
                     <button
                       className="btn btn-secondary"
                       style={{ padding: "0.4rem 0.8rem", fontSize: "0.8125rem" }}

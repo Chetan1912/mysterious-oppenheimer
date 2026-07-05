@@ -126,6 +126,16 @@
   .table td {
     display: block;
     width: 100%;
+    min-width: 0 !important;
+  }
+
+  .colTime,
+  .colUser,
+  .colRole,
+  .colAction,
+  .colDetails {
+    min-width: 0 !important;
+    width: auto !important;
   }
 
   .table thead {

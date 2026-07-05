@@ -44,6 +44,12 @@
   gap: 1rem;
 }
 
+@media (max-width: 1200px) {
+  .filterGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 @media (max-width: 768px) {
   .filterGrid {
     grid-template-columns: 1fr;
@@ -128,7 +134,7 @@
   color: var(--neutral-900);
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1200px) {
   .tableContainer {
     border: none;
     background: transparent;
